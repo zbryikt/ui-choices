@@ -1,14 +1,14 @@
 ui-choices
 ==========
 
-angular bound, bootstrap style (multiple) choice button group directive.
+Angular bound, bootstrap style (multiple) choice button group directive. It works on Bootstrap 3.0.
 
 
 Requirements
 ----------
 * AngularJS
 * JQuery
-* Bootstrap
+* Bootstrap (3.0+)
 
 
 Usage
