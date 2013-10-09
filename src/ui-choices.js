@@ -6,21 +6,43 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     transclude: true,
     scope: {
       multiple: '=',
-      ngModel: '=',
+      model: '=ngModel',
       id: '='
     },
     template: "<div class='btn-group' data-toggle='buttons' ng-transclude></div>",
     link: function(scope, element, attrs){
-      return element.on('count-active', function(){
+      element.on('count-active', function(){
         var res$, i$, ref$, len$, e;
         res$ = [];
         for (i$ = 0, len$ = (ref$ = element.find('label.active')).length; i$ < len$; ++i$) {
           e = ref$[i$];
           res$.push($(e).attr('value'));
         }
-        scope.ngModel = res$;
+        scope.model = res$;
         return scope.$apply();
       });
+      return scope.$watch('model', function(v){
+        var res$, i$, len$, x, ref$, it, results$ = [];
+        if (!v || !v.length) {
+          return;
+        }
+        res$ = [];
+        for (i$ = 0, len$ = v.length; i$ < len$; ++i$) {
+          x = v[i$];
+          res$.push(x + "");
+        }
+        v = res$;
+        for (i$ = 0, len$ = (ref$ = element.find('label')).length; i$ < len$; ++i$) {
+          it = ref$[i$];
+          it = $(it);
+          if (in$(it.attr('value'), v)) {
+            results$.push(it.addClass('active'));
+          } else {
+            results$.push(it.removeClass('active'));
+          }
+        }
+        return results$;
+      }, true);
     },
     controller: function($scope, $element){
       return this.isMultiple = function(){
@@ -47,3 +69,8 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     }
   };
 });
+function in$(x, xs){
+  var i = -1, l = xs.length >>> 0;
+  while (++i < l) if (x === xs[i]) return true;
+  return false;
+}
