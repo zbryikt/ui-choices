@@ -1,4 +1,4 @@
-angular.module \choices, <[]>
+angular.module \ui.choices, <[]>
 .directive \choices ($compile) ->
   return
     restrict: 'E'
