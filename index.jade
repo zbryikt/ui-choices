@@ -1,0 +1,37 @@
+!!!5
+html
+  head
+    link(rel="stylesheet",type="text/css",href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css")
+    script(type="text/javascript",src="//codeorigin.jquery.com/jquery-1.10.2.min.js")
+    script(type="text/javascript",src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
+    script(type="text/javascript",src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js")
+    script(type="text/javascript",src="ui-choices.js")
+    script(type="text/javascript",src="app.js")
+    style(type="text/css").
+      html, body {
+        margin: 0; padding: 20px; width: 100%; height: 100%
+      }
+  body(ng-app="myapp",ng-controller="myctrl")
+    h2 ui-choices example
+    h4 Choose Your Favorite Transportation
+    hr
+    choices(id="my-choice-1",multiple="true",ng-model="transportation")
+      choice(value="bike") Bike
+      choice(value="car") Car
+      choice(value="trunk") Trunk
+    hr
+    h4 Your Choices:
+    blockquote
+      | {{transportation}}
+    br
+    hr
+    h4 Choose Your Favorite Fruit
+    hr
+    choices(id="my-choice-2",ng-model="fruit")
+      choice(value="banana") Banana
+      choice(value="graphfruit") Graphfruit
+      choice(value="Pitaya") Pitaya
+    hr
+    h4 Your Choice:
+    blockquote
+      | {{fruit}}
