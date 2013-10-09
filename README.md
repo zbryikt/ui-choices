@@ -41,3 +41,12 @@ In above example, checked values will be save in "my-choices" as an array. That 
 
 Then my-choices will be ["bike","trunk"] if Trunk and Car are chosen.
 
+
+Example
+----------
+You can find an live demo [here](http://zbryikt.github.io/ui-choices/)
+
+
+License
+----------
+MIT License
