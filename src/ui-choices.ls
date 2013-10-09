@@ -1,16 +1,26 @@
-angular.module \ui.choices, <[]>
+angular.module \choices, <[]>
 .directive \choices ($compile) ->
   return
     restrict: 'E'
     replace: true
     transclude: true
-    scope: {multiple: '=', ng-model: '=', id: '='}
+    scope: {multiple: '=', model: '=ngModel', id: '='}
     template: "<div class='btn-group' data-toggle='buttons' ng-transclude></div>"
 
     link: (scope, element, attrs) ->
       element.on \count-active ->
-        scope.ng-model = [$ e .attr \value for e in element.find \label.active]
+        scope.model = [$ e .attr \value for e in element.find \label.active]
         scope.$apply!
+      scope.$watch \model, (v) ->
+        if !v or !v.length => return
+        v = ["#{x}" for x in v]
+        for it in element.find \label
+          it = $ it
+          if it.attr(\value) in v =>
+            it.addClass \active
+          else
+            it.removeClass \active
+      ,true
 
     controller: ($scope, $element) ->
       @is-multiple = -> $scope.multiple
