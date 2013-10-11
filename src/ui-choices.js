@@ -21,7 +21,7 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           }
           scope.model = res$;
         } else {
-          if (typeof scope.model !== typeof {}) {
+          if (typeof scope.model !== typeof {} || $.isArray(scope.model)) {
             scope.model = {};
           }
           res$ = [];
