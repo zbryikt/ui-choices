@@ -9,7 +9,8 @@ angular.module \ui.choices, <[]>
 
     link: (scope, element, attrs) ->
       scope{type} = attrs
-      element.on \count-active ->
+
+      update = (scope, element) ->
         if scope.type == "array" =>
           scope.model = [$ e .attr \value for e in element.find \label.active]
         else
@@ -17,6 +18,11 @@ angular.module \ui.choices, <[]>
           v = [[e.className, $ e .attr \value] for e in element.find \label]
           v.filter(-> it.0.search("active")>=0)map(-> scope.{}model[it.1] = true)
           v.filter(-> it.0.search("active")<0)map(-> scope.{}model[it.1] = false)
+
+      update scope, element
+      
+      element.on \count-active ->
+        update scope, element
         scope.$apply!
       scope.$watch \model, (v) ->
         if !v or (!v.length and scope.type=="array") => return
