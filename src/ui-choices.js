@@ -5,20 +5,42 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     replace: true,
     transclude: true,
     scope: {
-      multiple: '=',
       model: '=ngModel',
       id: '='
     },
     template: "<div class='btn-group' data-toggle='buttons' ng-transclude></div>",
     link: function(scope, element, attrs){
+      scope.type = attrs.type;
       element.on('count-active', function(){
-        var res$, i$, ref$, len$, e;
-        res$ = [];
-        for (i$ = 0, len$ = (ref$ = element.find('label.active')).length; i$ < len$; ++i$) {
-          e = ref$[i$];
-          res$.push($(e).attr('value'));
+        var res$, i$, ref$, len$, e, v;
+        if (scope.type === "array") {
+          res$ = [];
+          for (i$ = 0, len$ = (ref$ = element.find('label.active')).length; i$ < len$; ++i$) {
+            e = ref$[i$];
+            res$.push($(e).attr('value'));
+          }
+          scope.model = res$;
+        } else {
+          if (typeof scope.model !== typeof {}) {
+            scope.model = {};
+          }
+          res$ = [];
+          for (i$ = 0, len$ = (ref$ = element.find('label')).length; i$ < len$; ++i$) {
+            e = ref$[i$];
+            res$.push([e.className, $(e).attr('value')]);
+          }
+          v = res$;
+          v.filter(function(it){
+            return it[0].search("active") >= 0;
+          }).map(function(it){
+            return (scope.model || (scope.model = {}))[it[1]] = true;
+          });
+          v.filter(function(it){
+            return it[0].search("active") < 0;
+          }).map(function(it){
+            return (scope.model || (scope.model = {}))[it[1]] = false;
+          });
         }
-        scope.model = res$;
         return scope.$apply();
       });
       return scope.$watch('model', function(v){
@@ -45,8 +67,13 @@ angular.module('ui.choices', []).directive('choices', function($compile){
       }, true);
     },
     controller: function($scope, $element){
-      return this.isMultiple = function(){
+      $scope.multiple = $element.attr('multiple');
+      $scope.btnType = $element.attr('btn-type');
+      this.isMultiple = function(){
         return $scope.multiple;
+      };
+      return this.btnType = function(){
+        return $scope.btnType;
       };
     }
   };
@@ -56,8 +83,10 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     transclude: true,
     replace: true,
     require: "^choices",
-    template: "<label class='btn btn-primary'><input type='radio'><span ng-transclude></span></label>",
+    template: "<label class='btn'><input type='radio'><span ng-transclude></span></label>",
     link: function(scope, element, attrs, ctrl){
+      var that;
+      element.addClass((that = ctrl.btnType()) ? that : 'btn-primary');
       if (ctrl.isMultiple()) {
         element.find('input').attr('type', 'checkbox');
       }
