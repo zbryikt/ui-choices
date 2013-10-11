@@ -11,83 +11,136 @@ html
       html, body {
         margin: 0; padding: 20px; width: 100%; height: 100%
       }
+      .sep {
+        width: 100%; border-bottom: 1px dashed #ccc; margin: 10px;
+      }
   body(ng-app="myapp",ng-controller="myctrl")
     h2 ui-choices example
+    hr
     h4 Basic Button Group - Single Choice
-    hr
-    choices(id="my-choice-1",ng-model="fruit1")
-      choice(value="banana") Banana
-      choice(value="graphfruit") Graphfruit
-      choice(value="pitaya") Pitaya
-    hr
-    h4 Your Choices:
-    blockquote
-      | {{fruit1}}
-    hr
+    .row
+      .col-sm-4
+        choices(ng-model="fruit1")
+          choice(value="banana") Banana
+          choice(value="graphfruit") Graphfruit
+          choice(value="pitaya") Pitaya
+        .sep
+        h4 Your Choices:
+        blockquote
+          | {{fruit1}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          &lt;choices ng-model="fruit1"&gt;
+              &lt;choice value="banana"&gt; Banana &lt;/choice&gt;
+              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
+              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
+          &lt;/choices&gt;
     br
-
+    hr
     h4 Multiple Choice
-    hr
-    choices(id="my-choice-2", multiple, ng-model="fruit2")
-      choice(value="banana") Banana
-      choice(value="graphfruit") Graphfruit
-      choice(value="Pitaya") Pitaya
-    hr
-    h4 Your Choice:
-    blockquote
-      | {{fruit2}}
-    hr
+    .row
+      .col-sm-4
+        choices(multiple, ng-model="fruit2")
+          choice(value="banana") Banana
+          choice(value="graphfruit") Graphfruit
+          choice(value="Pitaya") Pitaya
+        .sep
+        h4 Your Choice:
+        blockquote
+          | {{fruit2}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          &lt;choices multiple ng-model="fruit2"&gt;
+              &lt;choice value="banana"&gt; Banana &lt;/choice&gt;
+              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
+              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
+          &lt;/choices&gt;
     br
-
+    hr
     h4 Multiple Choice with Default Values
-    hr
-    choices(id="my-choice-3", multiple, ng-model="fruit3")
-      choice(value="banana",active) Banana
-      choice(value="graphfruit") Graphfruit
-      choice(value="Pitaya") Pitaya
-    hr
-    h4 Your Choice:
-    blockquote
-      | {{fruit3}}
-    hr
+    .row
+      .col-sm-4
+        choices(multiple, ng-model="fruit3")
+          choice(value="banana",active) Banana
+          choice(value="graphfruit") Graphfruit
+          choice(value="Pitaya") Pitaya
+        .sep
+        h4 Your Choice:
+        blockquote
+          | {{fruit3}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          &lt;choices multiple ng-model="fruit3"&gt;
+              &lt;choice value="banana" active&gt; Banana &lt;/choice&gt;
+              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
+              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
+          &lt;/choices&gt;
     br
-
+    hr
     h4 Multiple Choice with Fallback Value
-    hr
-    choices(id="my-choice-4", multiple, ng-model="fruit4")
-      choice(value="banana",fallback, active) Banana
-      choice(value="graphfruit") Graphfruit
-      choice(value="Pitaya") Pitaya
-    hr
-    h4 Your Choice:
-    blockquote
-      | {{fruit4}}
-    hr
+    .row
+      .col-sm-4
+        choices(multiple, ng-model="fruit4")
+          choice(value="banana",fallback, active) Banana
+          choice(value="graphfruit") Graphfruit
+          choice(value="Pitaya") Pitaya
+        .sep
+        h4 Your Choice:
+        blockquote
+          | {{fruit4}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          &lt;choices multiple ng-model="fruit4"&gt;
+              &lt;choice value="banana" fallback active&gt; Banana &lt;/choice&gt;
+              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
+              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
+          &lt;/choices&gt;
     br
-
+    hr
     h4 Change Button Style
-    hr
-    choices(id="my-choice-5", multiple, btn-type="btn-danger", ng-model="fruit5")
-      choice(value="banana",fallback, active, btn-type="btn-success") Banana
-      choice(value="graphfruit") Graphfruit
-      choice(value="Pitaya") Pitaya
-    hr
-    h4 Your Choice:
-    blockquote
-      | {{fruit5}}
-    hr
+    .row
+      .col-sm-4
+        choices(multiple, btn-type="btn-danger", ng-model="fruit5")
+          choice(value="banana",fallback, active, btn-type="btn-success") Banana
+          choice(value="graphfruit") Graphfruit
+          choice(value="Pitaya") Pitaya
+        .sep
+        h4 Your Choice:
+        blockquote
+          | {{fruit5}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          &lt;choices multiple btn-type="btn-danger" ng-model="fruit5"&gt;
+              &lt;choice value="banana" fallback active btn-type="btn-success"&gt; Banana &lt;/choice&gt;
+              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
+              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
+          &lt;/choices&gt;
     br
-
+    hr
     h4 Use Array Instead of Hash
-    hr
-    choices(id="my-choice-5", multiple, data-type="array", btn-type="btn-danger", ng-model="fruit6")
-      choice(value="banana",fallback, active, btn-type="btn-success") Banana
-      choice(value="graphfruit") Graphfruit
-      choice(value="Pitaya") Pitaya
-    hr
-    h4 Your Choice:
-    blockquote
-      | {{fruit6}}
+    .row
+      .col-sm-4
+        choices(multiple, data-type="array", btn-type="btn-danger", ng-model="fruit6")
+          choice(value="banana",fallback, active, btn-type="btn-success") Banana
+          choice(value="graphfruit") Graphfruit
+          choice(value="Pitaya") Pitaya
+        .sep
+        h4 Your Choice:
+        blockquote
+          | {{fruit6}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          &lt;choices multiple data-type="array" btn-type="btn-danger" ng-model="fruit6"&gt;
+              &lt;choice value="banana" fallback active btn-type="btn-success"&gt; Banana &lt;/choice&gt;
+              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
+              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
+          &lt;/choices&gt;
     hr
     br
 
