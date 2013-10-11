@@ -12,8 +12,19 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     link: function(scope, element, attrs){
       var update;
       scope.type = attrs.type;
-      update = function(scope, element){
+      update = function(scope, element, target){
         var e, v, res$, i$, ref$, len$;
+        if (element.find('label.active[alone]').length > 0) {
+          if (!target) {
+            target = element.find('label[alone]')[0];
+          }
+          if ($(target).attr('alone') !== undefined) {
+            element.find('label').removeClass('active');
+            $(target).addClass('active');
+          } else {
+            element.find('label[alone]').removeClass('active');
+          }
+        }
         if (scope.type === "array") {
           return scope.model = (function(){
             var i$, ref$, len$, results$ = [];
@@ -46,8 +57,8 @@ angular.module('ui.choices', []).directive('choices', function($compile){
         }
       };
       update(scope, element);
-      element.on('count-active', function(){
-        update(scope, element);
+      element.on('count-active', function(e, target){
+        update(scope, element, target);
         return scope.$apply();
       });
       return scope.$watch('model', function(v){
@@ -105,13 +116,16 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     template: "<label class='btn'><input type='radio'><span ng-transclude></span></label>",
     link: function(scope, element, attrs, ctrl){
       var that;
+      if ("active" in attrs) {
+        element.addClass("active");
+      }
       element.addClass((that = ctrl.btnType()) ? that : 'btn-primary');
       if (ctrl.isMultiple()) {
         element.find('input').attr('type', 'checkbox');
       }
       return element.on('click', function(){
         return setTimeout(function(){
-          return element.parent().trigger('count-active');
+          return element.parent().trigger('count-active', element);
         }, 0);
       });
     }

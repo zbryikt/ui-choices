@@ -10,7 +10,14 @@ angular.module \ui.choices, <[]>
     link: (scope, element, attrs) ->
       scope{type} = attrs
 
-      update = (scope, element) ->
+      update = (scope, element, target) ->
+        if element.find 'label.active[alone]' .length >0 =>
+          if !target => target = element.find 'label[alone]' .0
+          if ($ target .attr \alone)!=undefined =>
+            element.find \label .removeClass \active
+            $ target .addClass \active
+          else element.find 'label[alone]' .removeClass \active
+
         if scope.type == "array" =>
           scope.model = [$ e .attr \value for e in element.find \label.active]
         else
@@ -21,8 +28,8 @@ angular.module \ui.choices, <[]>
 
       update scope, element
       
-      element.on \count-active ->
-        update scope, element
+      element.on \count-active (e,target)->
+        update scope, element, target
         scope.$apply!
       scope.$watch \model, (v) ->
         if !v or (!v.length and scope.type=="array") => return
@@ -48,7 +55,8 @@ angular.module \ui.choices, <[]>
     require: "^choices"
     template: "<label class='btn'><input type='radio'><span ng-transclude></span></label>"
     link: (scope, element, attrs, ctrl) ->
+      if "active" of attrs => element.addClass "active"
       element.addClass if ctrl.btn-type! => that else \btn-primary
       if ctrl.is-multiple! => element.find \input .attr \type, \checkbox
-      element.on \click -> setTimeout (-> element.parent!trigger \count-active), 0
+      element.on \click -> setTimeout (-> element.parent!trigger \count-active, element), 0
  
