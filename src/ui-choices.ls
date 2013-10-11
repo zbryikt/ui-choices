@@ -59,7 +59,7 @@ angular.module \ui.choices, <[]>
     require: "^choices"
     template: "<label class='btn'><span ng-transclude></span></label>"
     link: (s, e, a, c) ->
-      e.addClass if c.btntype! => that else \btn-primary
+      e.addClass if a[\btnType] => that else if c.btntype! => that else \btn-primary
       c.node.add e, a
       e.on \click -> 
         c.node.tgl v = e.attr \value
