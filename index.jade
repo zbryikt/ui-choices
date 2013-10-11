@@ -122,6 +122,7 @@ html
           &lt;/choices&gt;
     br
     hr
+
     h4 Use Array Instead of Hash
     .row
       .col-sm-4
@@ -140,6 +141,40 @@ html
               &lt;choice value="banana" fallback active btn-type="btn-success"&gt; Banana &lt;/choice&gt;
               &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
               &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
+          &lt;/choices&gt;
+    hr
+    br
+
+    .row
+      .col-sm-4
+        h4 Customize Button Content
+        choices(ng-model="fruit7")
+          choice(value="banana",btn-type="btn-success")
+            i.glyphicon.glyphicon-ok
+            |  Banana
+          choice(value="graphfruit",btn-type="btn-warning")
+            i.glyphicon.glyphicon-exclamation-sign
+            |  Graphfruit
+          choice(value="Pitaya",btn-type="btn-danger")
+            i.glyphicon.glyphicon-remove
+            |  Pitaya
+        .sep
+        h4 Your Choice:
+        blockquote
+          | {{fruit7}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          &lt;choices ng-model="fruit7"&gt;
+              &lt;choice value="banana" btn-type="btn-success"&gt;
+                &lt;i class="glyphicon glyphicon-ok"&gt;&lt;/i&gt; Banana
+              &lt;/choice&gt;
+              &lt;choice value="graphfruit" btn-type="btn-warning"&gt;
+                &lt;i class="glyphicon glyphicon-exclamation-sign"&gt;&lt;/i&gt; Graphfruit
+              &lt;/choice&gt;
+              &lt;choice value="pitaya" btn-type="btn-danger"&gt;
+                &lt;i class="glyphicon glyphicon-remove"&gt;&lt;/i&gt; Pitaya
+              &lt;/choice&gt;
           &lt;/choices&gt;
     hr
     br
