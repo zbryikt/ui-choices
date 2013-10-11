@@ -44,16 +44,28 @@ angular.module('ui.choices', []).directive('choices', function($compile){
         return scope.$apply();
       });
       return scope.$watch('model', function(v){
-        var res$, i$, len$, x, ref$, it, results$ = [];
-        if (!v || !v.length) {
+        var res$, i$, len$, x, k, ref$, it, results$ = [];
+        if (!v || (!v.length && scope.type === "array")) {
           return;
         }
-        res$ = [];
-        for (i$ = 0, len$ = v.length; i$ < len$; ++i$) {
-          x = v[i$];
-          res$.push(x + "");
+        if (scope.type === "array") {
+          res$ = [];
+          for (i$ = 0, len$ = v.length; i$ < len$; ++i$) {
+            x = v[i$];
+            res$.push(x + "");
+          }
+          v = res$;
+        } else {
+          v = (function(){
+            var results$ = [];
+            for (k in v) {
+              results$.push(k);
+            }
+            return results$;
+          }()).filter(function(it){
+            return v[it];
+          });
         }
-        v = res$;
         for (i$ = 0, len$ = (ref$ = element.find('label')).length; i$ < len$; ++i$) {
           it = ref$[i$];
           it = $(it);
