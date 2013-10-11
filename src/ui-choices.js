@@ -13,7 +13,7 @@ angular.module('ui.choices', []).directive('choices', function($compile){
       var update;
       s.type = a['type'];
       update = function(s, e, v){
-        var ref$, d, k, res$;
+        var ref$, d, k, res$, fb;
         ref$ = [s.data, (v && s.data[v]) || {}], d = ref$[0], v = ref$[1];
         res$ = [];
         for (k in d) {
@@ -31,6 +31,16 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           }).map(function(it){
             return d[it].on = false;
           });
+          if (k.filter(function(it){
+            return d[it].on;
+          }).length === 0) {
+            fb = k.filter(function(it){
+              return d[it].fb;
+            });
+            if (fb.length) {
+              d[fb[0]].on = true;
+            }
+          }
         }
         k.map(function(it){
           if (d[it].on) {
