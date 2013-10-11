@@ -43,6 +43,9 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           }
         }
         k.map(function(it){
+          if (d[it].m) {
+            s.$parent[d[it].m] = d[it].on;
+          }
           if (d[it].on) {
             return d[it].e.addClass('active');
           } else {
@@ -93,9 +96,14 @@ angular.module('ui.choices', []).directive('choices', function($compile){
         for (k in ref$ = s.data) {
           v = ref$[k];
           if (in$(k, d)) {
-            results$.push(v.e.addClass('active'));
+            v.on = true;
+            v.e.addClass('active');
           } else {
-            results$.push(v.e.removeClass('active'));
+            v.on = false;
+            v.e.removeClass('active');
+          }
+          if (v.m) {
+            results$.push(s.$parent[v.m] = v.on);
           }
         }
         return results$;
@@ -112,6 +120,7 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           return this.d[v] = {
             e: e,
             v: v,
+            m: a['ngModel'],
             fb: a['fallback'] !== undefined,
             on: a['active'] !== undefined
           };
@@ -124,8 +133,11 @@ angular.module('ui.choices', []).directive('choices', function($compile){
       this.isMulti = function(){
         return $scope.multi;
       };
-      return this.btntype = function(){
+      this.btntype = function(){
         return $scope.btntype;
+      };
+      return this.scope = function(){
+        return $scope;
       };
     }
   };
@@ -135,6 +147,9 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     transclude: true,
     replace: true,
     require: "^choices",
+    scope: {
+      id: '='
+    },
     template: "<label class='btn'><span ng-transclude></span></label>",
     link: function(s, e, a, c){
       var that;
@@ -143,8 +158,8 @@ angular.module('ui.choices', []).directive('choices', function($compile){
         : (that = c.btntype()) ? that : 'btn-primary');
       c.node.add(e, a);
       return e.on('click', function(){
-        var v;
-        c.node.tgl(v = e.attr('value'));
+        var r, v;
+        r = c.node.tgl(v = e.attr('value'));
         return setTimeout(function(){
           return e.parent().trigger('update', v);
         }, 0);

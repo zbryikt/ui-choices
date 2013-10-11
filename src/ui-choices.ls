@@ -21,6 +21,7 @@ angular.module \ui.choices, <[]>
             fb = k.filter(->d[it]fb)
             if fb.length => d[fb.0]on = true
         k.map -> 
+          if d[it]m => s.$parent[d[it]m] = d[it]on
           if d[it]on => d[it]e.addClass \active
           else d[it]e.removeClass \active
         if s.type == "array" => s.model = k.filter(->d[it]on)map -> d[it]v
@@ -37,8 +38,13 @@ angular.module \ui.choices, <[]>
         if s.type=="array" => d = ["#{x}" for x in d]
         else d = [k for k of d].filter(-> d[it])
         for k,v of s.data
-          if k in d => v.e.addClass \active
-          else v.e.removeClass \active
+          if k in d => 
+            v.on = true
+            v.e.addClass \active
+          else 
+            v.on = false
+            v.e.removeClass \active
+          if v.m => s.$parent[v.m] = v.on
       ,true
 
     controller: ($scope, $element) ->
@@ -48,11 +54,12 @@ angular.module \ui.choices, <[]>
         d: {}
         add: (e,a) ->
           v = a[\value]
-          @d[v] = {} <<< {e, v, fb: a[\fallback]!=undefined, on: a[\active]!=undefined}
+          @d[v] = {} <<< {e, v, m: a[\ngModel], fb: a[\fallback]!=undefined, on: a[\active]!=undefined}
         tgl: (v) -> @d[v]on = !@d[v]on
       $scope.data = @node.d
       @is-multi = -> $scope.multi
       @btntype = -> $scope.btntype
+      @scope = -> $scope
 
 .directive \choice ($compile) ->
   return
@@ -60,11 +67,12 @@ angular.module \ui.choices, <[]>
     transclude: true
     replace: true
     require: "^choices"
+    scope: {id: '='}
     template: "<label class='btn'><span ng-transclude></span></label>"
     link: (s, e, a, c) ->
       e.addClass if a[\btnType] => that else if c.btntype! => that else \btn-primary
       c.node.add e, a
       e.on \click -> 
-        c.node.tgl v = e.attr \value
+        r = c.node.tgl v = e.attr \value
         setTimeout (-> e.parent!trigger \update, v), 0
  
