@@ -13,21 +13,22 @@ html
       }
   body(ng-app="myapp",ng-controller="myctrl")
     h2 ui-choices example
-    h4 Choose Your Favorite Transportation
+    h4 Basic Button Group - Single Choice
     hr
-    choices(id="my-choice-1",multiple="true",ng-model="transportation")
-      choice(value="bike") Bike
-      choice(value="car") Car
-      choice(value="trunk") Trunk
+    choices(id="my-choice-1",ng-model="fruit1")
+      choice(value="banana") Banana
+      choice(value="graphfruit") Graphfruit
+      choice(value="pitaya") Pitaya
     hr
     h4 Your Choices:
     blockquote
       | {{transportation}}
+    hr
     br
+
+    h4 Multiple Choice
     hr
-    h4 Choose Your Favorite Fruit
-    hr
-    choices(id="my-choice-2",ng-model="fruit")
+    choices(id="my-choice-2", multiple, ng-model="fruit2")
       choice(value="banana") Banana
       choice(value="graphfruit") Graphfruit
       choice(value="Pitaya") Pitaya
@@ -37,5 +38,19 @@ html
       | {{fruit}}
     hr
     br
+
+    h4 Multiple Choice with Default Values
+    hr
+    choices(id="my-choice-2", multiple, ng-model="fruit3")
+      choice(value="banana",active) Banana
+      choice(value="graphfruit") Graphfruit
+      choice(value="Pitaya") Pitaya
+    hr
+    h4 Your Choice:
+    blockquote
+      | {{fruit}}
+    hr
+    br
+
     | This angular module 'ui-choices' is specific for bootstrap 3.0. Source code can be found at 
     a(href="http://github.com/zbryikt/ui-choices/") http://github.com/zbryikt/ui-choices/
