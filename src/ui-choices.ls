@@ -10,12 +10,15 @@ angular.module \ui.choices, <[]>
     link: (scope, element, attrs) ->
       scope{type} = attrs
       update = (scope, element, target) ->
-        if element.find 'label.active[alone]' .length >0 =>
-          if !target => target = element.find 'label[alone]' .0
-          if ($ target .attr \alone)!=undefined =>
+        if element.find 'label.active[fallback]' .length >0 =>
+          if !target => target = element.find 'label[fallback]' .0
+          if ($ target .attr \fallback)!=undefined =>
             element.find \label .removeClass \active
             $ target .addClass \active
-          else element.find 'label[alone]' .removeClass \active
+          else element.find 'label[fallback]' .removeClass \active
+        if element.find 'label.active' .length == 0 =>
+          $ (element.find 'label[fallback]' .0) .addClass \active
+
         if scope.type == "array" =>
           scope.model = [$ e .attr \value for e in element.find \label.active]
         else

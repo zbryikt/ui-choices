@@ -14,16 +14,19 @@ angular.module('ui.choices', []).directive('choices', function($compile){
       scope.type = attrs.type;
       update = function(scope, element, target){
         var e, v, res$, i$, ref$, len$;
-        if (element.find('label.active[alone]').length > 0) {
+        if (element.find('label.active[fallback]').length > 0) {
           if (!target) {
-            target = element.find('label[alone]')[0];
+            target = element.find('label[fallback]')[0];
           }
-          if ($(target).attr('alone') !== undefined) {
+          if ($(target).attr('fallback') !== undefined) {
             element.find('label').removeClass('active');
             $(target).addClass('active');
           } else {
-            element.find('label[alone]').removeClass('active');
+            element.find('label[fallback]').removeClass('active');
           }
+        }
+        if (element.find('label.active').length === 0) {
+          $(element.find('label[fallback]')[0]).addClass('active');
         }
         if (scope.type === "array") {
           return scope.model = (function(){
