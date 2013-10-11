@@ -127,7 +127,9 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     template: "<label class='btn'><span ng-transclude></span></label>",
     link: function(s, e, a, c){
       var that;
-      e.addClass((that = c.btntype()) ? that : 'btn-primary');
+      e.addClass((that = a['btnType'])
+        ? that
+        : (that = c.btntype()) ? that : 'btn-primary');
       c.node.add(e, a);
       return e.on('click', function(){
         var v;
