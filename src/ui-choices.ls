@@ -13,7 +13,7 @@ angular.module \ui.choices, <[]>
         if scope.type == "array" =>
           scope.model = [$ e .attr \value for e in element.find \label.active]
         else
-          if typeof(scope.model) != typeof({}) => scope.model = {}
+          if typeof(scope.model) != typeof({}) or ($.isArray scope.model) => scope.model = {}
           v = [[e.className, $ e .attr \value] for e in element.find \label]
           v.filter(-> it.0.search("active")>=0)map(-> scope.{}model[it.1] = true)
           v.filter(-> it.0.search("active")<0)map(-> scope.{}model[it.1] = false)
