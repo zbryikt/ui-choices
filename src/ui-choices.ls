@@ -19,14 +19,13 @@ angular.module \ui.choices, <[]>
           v.filter(-> it.0.search("active")<0)map(-> scope.{}model[it.1] = false)
         scope.$apply!
       scope.$watch \model, (v) ->
-        if !v or !v.length => return
-        v = ["#{x}" for x in v]
+        if !v or (!v.length and scope.type=="array") => return
+        if scope.type=="array" => v = ["#{x}" for x in v]
+        else v = [k for k of v].filter(-> v[it])
         for it in element.find \label
           it = $ it
-          if it.attr(\value) in v =>
-            it.addClass \active
-          else
-            it.removeClass \active
+          if it.attr(\value) in v => it.addClass \active
+          else it.removeClass \active
       ,true
 
     controller: ($scope, $element) ->
