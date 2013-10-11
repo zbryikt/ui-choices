@@ -67,7 +67,7 @@ In this case, You will get ["bike","car"] if "Bike" and "Car" are chosen.
     <choices ng-model="my-choices" btn-type="btn-link">
       <choice value="bike"> Bike
       <choice value="car"> Car
-      <choice value="trunk"> Trunk
+      <choice value="trunk",btn-type="btn-success"> Trunk
     </choices>
 
 ##### Default Active Buttons
@@ -82,10 +82,10 @@ add "active" attribute in choice tag then the tag will be toggled by default:
 
 ##### Exclusive Buttons
 
-add "alone" attribute in choice tag then the tag will de-toggled when other button is toggled.
+add "fallback" attribute in choice tag then the tag will de-toggled when other button is toggled. It will be toggled while no other buttons is toggled.
 
     <choices ng-model="my-choices" btn-type="btn-link">
-      <choice value="bike",alone> Bike
+      <choice value="bike",fallback> Bike
       <choice value="car"> Car
       <choice value="trunk"> Trunk
     </choices>
