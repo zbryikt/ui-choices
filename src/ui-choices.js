@@ -8,105 +8,113 @@ angular.module('ui.choices', []).directive('choices', function($compile){
       model: '=ngModel',
       id: '='
     },
-    template: "<div class='btn-group' data-toggle='buttons' ng-transclude></div>",
-    link: function(scope, element, attrs){
+    template: "<div class='btn-group' ng-transclude></div>",
+    link: function(s, e, a){
       var update;
-      scope.type = attrs.type;
-      update = function(scope, element, target){
-        var e, v, res$, i$, ref$, len$;
-        if (element.find('label.active[fallback]').length > 0) {
-          if (!target) {
-            target = element.find('label[fallback]')[0];
-          }
-          if ($(target).attr('fallback') !== undefined) {
-            element.find('label').removeClass('active');
-            $(target).addClass('active');
-          } else {
-            element.find('label[fallback]').removeClass('active');
-          }
+      update = function(s, e, v){
+        var ref$, d, k, res$;
+        ref$ = [s.data, (v && s.data[v]) || {}], d = ref$[0], v = ref$[1];
+        res$ = [];
+        for (k in d) {
+          res$.push(k);
         }
-        if (element.find('label.active').length === 0) {
-          $(element.find('label[fallback]')[0]).addClass('active');
-        }
-        if (scope.type === "array") {
-          return scope.model = (function(){
-            var i$, ref$, len$, results$ = [];
-            for (i$ = 0, len$ = (ref$ = element.find('label.active')).length; i$ < len$; ++i$) {
-              e = ref$[i$];
-              results$.push($(e).attr('value'));
-            }
-            return results$;
-          }());
-        } else {
-          if (typeof scope.model !== typeof {} || $.isArray(scope.model)) {
-            scope.model = {};
-          }
-          res$ = [];
-          for (i$ = 0, len$ = (ref$ = element.find('label')).length; i$ < len$; ++i$) {
-            e = ref$[i$];
-            res$.push([e.className, $(e).attr('value')]);
-          }
-          v = res$;
-          v.filter(function(it){
-            return it[0].search("active") >= 0;
-          }).map(function(it){
-            return (scope.model || (scope.model = {}))[it[1]] = true;
+        k = res$;
+        if (v.fb !== undefined || s.multi === undefined) {
+          k.map(function(it){
+            return d[it].on = false;
           });
-          return v.filter(function(it){
-            return it[0].search("active") < 0;
+          v.on = true;
+        } else {
+          k.filter(function(it){
+            return d[it].fb !== undefined;
           }).map(function(it){
-            return (scope.model || (scope.model = {}))[it[1]] = false;
+            return d[it].on = false;
+          });
+        }
+        k.map(function(it){
+          if (d[it].on) {
+            return d[it].e.addClass('active');
+          } else {
+            return d[it].e.removeClass('active');
+          }
+        });
+        if (s.type === "array") {
+          return s.model = k.filter(function(it){
+            return d[it].on;
+          }).map(function(it){
+            return d[it].v;
+          });
+        } else {
+          s.model = {};
+          return k.map(function(it){
+            return s.model[it] = d[it].on;
           });
         }
       };
-      update(scope, element);
-      element.on('count-active', function(e, target){
-        update(scope, element, target);
-        return scope.$apply();
+      update(s, e, null);
+      e.on('update', function(err, t){
+        update(s, e, t);
+        return s.$apply();
       });
-      return scope.$watch('model', function(v){
-        var res$, i$, len$, x, k, ref$, it, results$ = [];
-        if (!v || (!v.length && scope.type === "array")) {
+      return s.$watch('model', function(d){
+        var res$, i$, len$, x, k, ref$, v, results$ = [];
+        if (!d || (!d.length && s.type === "array")) {
           return;
         }
-        if (scope.type === "array") {
+        if (s.type === "array") {
           res$ = [];
-          for (i$ = 0, len$ = v.length; i$ < len$; ++i$) {
-            x = v[i$];
+          for (i$ = 0, len$ = d.length; i$ < len$; ++i$) {
+            x = d[i$];
             res$.push(x + "");
           }
-          v = res$;
+          d = res$;
         } else {
-          v = (function(){
+          d = (function(){
             var results$ = [];
-            for (k in v) {
+            for (k in d) {
               results$.push(k);
             }
             return results$;
           }()).filter(function(it){
-            return v[it];
+            return d[it];
           });
         }
-        for (i$ = 0, len$ = (ref$ = element.find('label')).length; i$ < len$; ++i$) {
-          it = ref$[i$];
-          it = $(it);
-          if (in$(it.attr('value'), v)) {
-            results$.push(it.addClass('active'));
+        for (k in ref$ = s.data) {
+          v = ref$[k];
+          if (in$(k, d)) {
+            results$.push(v.e.addClass('active'));
           } else {
-            results$.push(it.removeClass('active'));
+            results$.push(v.e.removeClass('active'));
           }
         }
         return results$;
       }, true);
     },
     controller: function($scope, $element){
-      $scope.multiple = $element.attr('multiple');
-      $scope.btnType = $element.attr('btn-type');
-      this.isMultiple = function(){
-        return $scope.multiple;
+      $scope.multi = $element.attr('multiple');
+      $scope.btntype = $element.attr('btn-type');
+      this.node = {
+        d: {},
+        add: function(e, a){
+          var v;
+          v = a['value'];
+          return this.d[v] = {
+            e: e,
+            v: v,
+            fb: a['fallback'],
+            on: a['active']
+          };
+        },
+        tgl: function(v){
+          return this.d[v].on = !this.d[v].on;
+        }
       };
-      return this.btnType = function(){
-        return $scope.btnType;
+      $scope.data = this.node.d;
+      this.isMulti = function(){
+        return $scope.multi;
+      };
+      return this.btntype = function(){
+        return $scope.btntype;
       };
     }
   };
@@ -116,19 +124,19 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     transclude: true,
     replace: true,
     require: "^choices",
-    template: "<label class='btn'><input type='radio'><span ng-transclude></span></label>",
-    link: function(scope, element, attrs, ctrl){
+    template: "<label class='btn'><span ng-transclude></span></label>",
+    link: function(s, e, a, c){
       var that;
-      if ("active" in attrs) {
-        element.addClass("active");
+      if ("active" in a) {
+        e.addClass("active");
       }
-      element.addClass((that = ctrl.btnType()) ? that : 'btn-primary');
-      if (ctrl.isMultiple()) {
-        element.find('input').attr('type', 'checkbox');
-      }
-      return element.on('click', function(){
+      e.addClass((that = c.btntype()) ? that : 'btn-primary');
+      c.node.add(e, a);
+      return e.on('click', function(){
+        var v;
+        c.node.tgl(v = e.attr('value'));
         return setTimeout(function(){
-          return element.parent().trigger('count-active', element);
+          return e.parent().trigger('update', v);
         }, 0);
       });
     }

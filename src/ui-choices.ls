@@ -5,49 +5,52 @@ angular.module \ui.choices, <[]>
     replace: true
     transclude: true
     scope: {model: '=ngModel', id: '='}
-    template: "<div class='btn-group' data-toggle='buttons' ng-transclude></div>"
+    template: "<div class='btn-group' ng-transclude></div>"
 
-    link: (scope, element, attrs) ->
-      scope{type} = attrs
+    link: (s, e, a) ->
+      #s{type} = attrs
 
-      update = (scope, element, target) ->
-        if element.find 'label.active[fallback]' .length >0 =>
-          if !target => target = element.find 'label[fallback]' .0
-          if ($ target .attr \fallback)!=undefined =>
-            element.find \label .removeClass \active
-            $ target .addClass \active
-          else element.find 'label[fallback]' .removeClass \active
-        if element.find 'label.active' .length == 0 =>
-          $ (element.find 'label[fallback]' .0) .addClass \active
+      update = (s, e, v) ->
+        [d,v] = [s.data, (v and s.data[v]) or {}]
+        k = [k for k of d]
+        if v.fb!=undefined or s.multi==undefined =>
+          k.map -> d[it]on = false
+          v.on = true
+        else k.filter(-> d[it]fb!=undefined)map -> d[it]on = false
+        k.map -> 
+          if d[it]on => d[it]e.addClass \active
+          else d[it]e.removeClass \active
+        if s.type == "array" => s.model = k.filter(->d[it]on)map -> d[it]v
+        else 
+          s.model = {}
+          k.map -> s.model[it] = d[it]on
 
-        if scope.type == "array" =>
-          scope.model = [$ e .attr \value for e in element.find \label.active]
-        else
-          if typeof(scope.model) != typeof({}) or ($.isArray scope.model) => scope.model = {}
-          v = [[e.className, $ e .attr \value] for e in element.find \label]
-          v.filter(-> it.0.search("active")>=0)map(-> scope.{}model[it.1] = true)
-          v.filter(-> it.0.search("active")<0)map(-> scope.{}model[it.1] = false)
-
-      update scope, element
+      update s, e, null
       
-      element.on \count-active (e,target)->
-        update scope, element, target
-        scope.$apply!
-      scope.$watch \model, (v) ->
-        if !v or (!v.length and scope.type=="array") => return
-        if scope.type=="array" => v = ["#{x}" for x in v]
-        else v = [k for k of v].filter(-> v[it])
-        for it in element.find \label
-          it = $ it
-          if it.attr(\value) in v => it.addClass \active
-          else it.removeClass \active
+      e.on \update (err,t)->
+        update s, e, t
+        s.$apply!
+      s.$watch \model, (d) ->
+        if !d or (!d.length and s.type=="array") => return
+        if s.type=="array" => d = ["#{x}" for x in d]
+        else d = [k for k of d].filter(-> d[it])
+        for k,v of s.data
+          if k in d => v.e.addClass \active
+          else v.e.removeClass \active
       ,true
 
     controller: ($scope, $element) ->
-      $scope.multiple = $element.attr \multiple
-      $scope.btn-type = $element.attr \btn-type
-      @is-multiple = -> $scope.multiple
-      @btn-type = -> $scope.btn-type
+      $scope.multi = $element.attr \multiple
+      $scope.btntype = $element.attr \btn-type
+      @node = 
+        d: {}
+        add: (e,a) ->
+          v = a[\value]
+          @d[v] = {} <<< {e, v, fb: a[\fallback], on: a[\active]}
+        tgl: (v) -> @d[v]on = !@d[v]on
+      $scope.data = @node.d
+      @is-multi = -> $scope.multi
+      @btntype = -> $scope.btntype
 
 .directive \choice ($compile) ->
   return
@@ -55,10 +58,12 @@ angular.module \ui.choices, <[]>
     transclude: true
     replace: true
     require: "^choices"
-    template: "<label class='btn'><input type='radio'><span ng-transclude></span></label>"
-    link: (scope, element, attrs, ctrl) ->
-      if "active" of attrs => element.addClass "active"
-      element.addClass if ctrl.btn-type! => that else \btn-primary
-      if ctrl.is-multiple! => element.find \input .attr \type, \checkbox
-      element.on \click -> setTimeout (-> element.parent!trigger \count-active, element), 0
+    template: "<label class='btn'><span ng-transclude></span></label>"
+    link: (s, e, a, c) ->
+      if "active" of a => e.addClass "active"
+      e.addClass if c.btntype! => that else \btn-primary
+      c.node.add e, a
+      e.on \click -> 
+        c.node.tgl v = e.attr \value
+        setTimeout (-> e.parent!trigger \update, v), 0
  
