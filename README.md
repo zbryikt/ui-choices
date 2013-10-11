@@ -35,7 +35,7 @@ You can now use these directives. For example:
       <choice value="trunk"> Trunk
     </choices>
 
-In above example, checked values will be save in "my-choices" as an object; for example, if you choose "Trunk", my-choices will be { "trunk": true }. Multiple choices is also possible:
+In above example, checked values will be saved in "my-choices" as an object; for example, if you choose "Trunk", my-choices will be { "trunk": true }. Multiple choices are also possible:
 
     <choices ng-model="my-choices" multiple="true">
       <choice value="bike"> Bike
@@ -50,7 +50,7 @@ Options
 
 ##### Result as Array
 
-You can config ui-choices to output array instead of object by adding **data-type="array"** attribute:
+You can configure ui-choices to output array instead of object by adding **data-type="array"** attribute:
 
     <choices ng-model="my-choices" data-type="array" multiple="true">
       <choice value="bike"> Bike
@@ -62,7 +62,7 @@ In this case, You will get ["bike","car"] if "Bike" and "Car" are chosen.
 
 ##### Button Style
 
-**btn-type="some-class-name"** will add *some-class-name* css class to buttons. For example:
+Use **btn-type** to assign custom css class to buttons:
 
     <choices ng-model="my-choices" btn-type="btn-link">
       <choice value="bike"> Bike
@@ -72,7 +72,7 @@ In this case, You will get ["bike","car"] if "Bike" and "Car" are chosen.
 
 ##### Default Active Buttons
 
-add "active" attribute in choice tag then the tag will be toggled by default:
+Choice tag with "active" attribute will be activated by default:
 
     <choices ng-model="my-choices" btn-type="btn-link">
       <choice value="bike"> Bike
@@ -82,7 +82,7 @@ add "active" attribute in choice tag then the tag will be toggled by default:
 
 ##### Exclusive Buttons
 
-add "fallback" attribute in choice tag then the tag will de-toggled when other button is toggled. It will be toggled while no other buttons is toggled.
+Choice tag with "fallback" attribute will be de-activated while other buttons are activated, and be activated when no buttons are activated:
 
     <choices ng-model="my-choices" btn-type="btn-link">
       <choice value="bike",fallback> Bike
