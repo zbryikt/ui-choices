@@ -10,16 +10,19 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     },
     template: "<div class='btn-group' data-toggle='buttons' ng-transclude></div>",
     link: function(scope, element, attrs){
+      var update;
       scope.type = attrs.type;
-      element.on('count-active', function(){
-        var res$, i$, ref$, len$, e, v;
+      update = function(scope, element){
+        var e, v, res$, i$, ref$, len$;
         if (scope.type === "array") {
-          res$ = [];
-          for (i$ = 0, len$ = (ref$ = element.find('label.active')).length; i$ < len$; ++i$) {
-            e = ref$[i$];
-            res$.push($(e).attr('value'));
-          }
-          scope.model = res$;
+          return scope.model = (function(){
+            var i$, ref$, len$, results$ = [];
+            for (i$ = 0, len$ = (ref$ = element.find('label.active')).length; i$ < len$; ++i$) {
+              e = ref$[i$];
+              results$.push($(e).attr('value'));
+            }
+            return results$;
+          }());
         } else {
           if (typeof scope.model !== typeof {} || $.isArray(scope.model)) {
             scope.model = {};
@@ -35,12 +38,16 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           }).map(function(it){
             return (scope.model || (scope.model = {}))[it[1]] = true;
           });
-          v.filter(function(it){
+          return v.filter(function(it){
             return it[0].search("active") < 0;
           }).map(function(it){
             return (scope.model || (scope.model = {}))[it[1]] = false;
           });
         }
+      };
+      update(scope, element);
+      element.on('count-active', function(){
+        update(scope, element);
         return scope.$apply();
       });
       return scope.$watch('model', function(v){
