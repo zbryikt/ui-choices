@@ -19,14 +19,14 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           res$.push(k);
         }
         k = res$;
-        if (v.fb !== undefined || s.multi === undefined) {
+        if (v.fb || (!s.multi && v.e)) {
           k.map(function(it){
             return d[it].on = false;
           });
           v.on = true;
-        } else {
+        } else if (v.e) {
           k.filter(function(it){
-            return d[it].fb !== undefined;
+            return d[it].fb;
           }).map(function(it){
             return d[it].on = false;
           });
@@ -39,18 +39,17 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           }
         });
         if (s.type === "array") {
-          s.model = k.filter(function(it){
+          return s.model = k.filter(function(it){
             return d[it].on;
           }).map(function(it){
             return d[it].v;
           });
         } else {
           s.model = {};
-          k.map(function(it){
+          return k.map(function(it){
             return s.model[it] = !!d[it].on;
           });
         }
-        return console.log(s.model);
       };
       update(s, e, null);
       e.on('update', function(err, t){
@@ -92,7 +91,7 @@ angular.module('ui.choices', []).directive('choices', function($compile){
       }, true);
     },
     controller: function($scope, $element){
-      $scope.multi = $element.attr('multiple');
+      $scope.multi = !!$element.attr('multiple');
       $scope.btntype = $element.attr('btn-type');
       this.node = {
         d: {},
@@ -102,8 +101,8 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           return this.d[v] = {
             e: e,
             v: v,
-            fb: a['fallback'],
-            on: a['active']
+            fb: a['fallback'] !== undefined,
+            on: a['active'] !== undefined
           };
         },
         tgl: function(v){
@@ -128,9 +127,6 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     template: "<label class='btn'><span ng-transclude></span></label>",
     link: function(s, e, a, c){
       var that;
-      if ("active" in a) {
-        e.addClass("active");
-      }
       e.addClass((that = c.btntype()) ? that : 'btn-primary');
       c.node.add(e, a);
       return e.on('click', function(){
