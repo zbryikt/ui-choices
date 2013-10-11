@@ -78,5 +78,18 @@ html
     hr
     br
 
+    h4 Use Array Instead of Hash
+    hr
+    choices(id="my-choice-5", multiple, data-type="array", btn-type="btn-danger", ng-model="fruit6")
+      choice(value="banana",fallback, active, btn-type="btn-success") Banana
+      choice(value="graphfruit") Graphfruit
+      choice(value="Pitaya") Pitaya
+    hr
+    h4 Your Choice:
+    blockquote
+      | {{fruit6}}
+    hr
+    br
+
     | This angular module 'ui-choices' is specific for bootstrap 3.0. Source code can be found at 
     a(href="http://github.com/zbryikt/ui-choices/") http://github.com/zbryikt/ui-choices/
