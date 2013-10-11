@@ -73,7 +73,7 @@ In this case, You will get ["bike","car"] if "Bike" and "Car" are chosen.
 
 Example
 ----------
-You can find an live demo [here](http://zbryikt.github.io/ui-choices/)
+You can find a live demo [here](http://zbryikt.github.io/ui-choices/)
 
 
 License
