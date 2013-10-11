@@ -39,17 +39,18 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           }
         });
         if (s.type === "array") {
-          return s.model = k.filter(function(it){
+          s.model = k.filter(function(it){
             return d[it].on;
           }).map(function(it){
             return d[it].v;
           });
         } else {
           s.model = {};
-          return k.map(function(it){
-            return s.model[it] = d[it].on;
+          k.map(function(it){
+            return s.model[it] = !!d[it].on;
           });
         }
+        return console.log(s.model);
       };
       update(s, e, null);
       e.on('update', function(err, t){

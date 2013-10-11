@@ -8,8 +8,6 @@ angular.module \ui.choices, <[]>
     template: "<div class='btn-group' ng-transclude></div>"
 
     link: (s, e, a) ->
-      #s{type} = attrs
-
       update = (s, e, v) ->
         [d,v] = [s.data, (v and s.data[v]) or {}]
         k = [k for k of d]
@@ -23,7 +21,8 @@ angular.module \ui.choices, <[]>
         if s.type == "array" => s.model = k.filter(->d[it]on)map -> d[it]v
         else 
           s.model = {}
-          k.map -> s.model[it] = d[it]on
+          k.map -> s.model[it] = !!d[it]on
+        console.log s.model
 
       update s, e, null
       
