@@ -90,6 +90,16 @@ Choice tag with "fallback" attribute will be de-activated while other buttons ar
       <choice value="trunk"> Trunk
     </choices>
 
+##### Binding on Specific Button
+
+You can bind data to state of specific button:
+
+    <choices ng-model="my-choices">
+      <choice value="bike",ng-model="isBikeChosen"> Bike
+      <choice value="car"> Car
+      <choice value="trunk"> Trunk
+    </choices>
+
 
 Example
 ----------
