@@ -16,8 +16,10 @@ angular.module \ui.choices, <[]>
           k.map -> d[it]on = false
           v.on = true
         else if v.e =>
-          k.filter(->d[it]fb)map -> 
-            d[it]on = false
+          k.filter(->d[it]fb)map -> d[it]on = false
+          if k.filter(->d[it]on).length==0 =>
+            fb = k.filter(->d[it]fb)
+            if fb.length => d[fb.0]on = true
         k.map -> 
           if d[it]on => d[it]e.addClass \active
           else d[it]e.removeClass \active
