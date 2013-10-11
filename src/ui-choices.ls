@@ -4,12 +4,19 @@ angular.module \ui.choices, <[]>
     restrict: 'E'
     replace: true
     transclude: true
-    scope: {multiple: '=', model: '=ngModel', id: '='}
+    scope: {model: '=ngModel', id: '='}
     template: "<div class='btn-group' data-toggle='buttons' ng-transclude></div>"
 
     link: (scope, element, attrs) ->
+      scope{type} = attrs
       element.on \count-active ->
-        scope.model = [$ e .attr \value for e in element.find \label.active]
+        if scope.type == "array" =>
+          scope.model = [$ e .attr \value for e in element.find \label.active]
+        else
+          if typeof(scope.model) != typeof({}) => scope.model = {}
+          v = [[e.className, $ e .attr \value] for e in element.find \label]
+          v.filter(-> it.0.search("active")>=0)map(-> scope.{}model[it.1] = true)
+          v.filter(-> it.0.search("active")<0)map(-> scope.{}model[it.1] = false)
         scope.$apply!
       scope.$watch \model, (v) ->
         if !v or !v.length => return
@@ -23,7 +30,10 @@ angular.module \ui.choices, <[]>
       ,true
 
     controller: ($scope, $element) ->
+      $scope.multiple = $element.attr \multiple
+      $scope.btn-type = $element.attr \btn-type
       @is-multiple = -> $scope.multiple
+      @btn-type = -> $scope.btn-type
 
 .directive \choice ($compile) ->
   return
@@ -31,8 +41,9 @@ angular.module \ui.choices, <[]>
     transclude: true
     replace: true
     require: "^choices"
-    template: "<label class='btn btn-primary'><input type='radio'><span ng-transclude></span></label>"
+    template: "<label class='btn'><input type='radio'><span ng-transclude></span></label>"
     link: (scope, element, attrs, ctrl) ->
+      element.addClass if ctrl.btn-type! => that else \btn-primary
       if ctrl.is-multiple! => element.find \input .attr \type, \checkbox
       element.on \click -> setTimeout (-> element.parent!trigger \count-active), 0
  
