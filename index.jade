@@ -31,11 +31,11 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          &lt;choices ng-model="fruit1"&gt;
-              &lt;choice value="banana"&gt; Banana &lt;/choice&gt;
-              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
-              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
-          &lt;/choices&gt;
+          <choices ng-model="fruit1">
+              <choice value="banana"> Banana </choice>
+              <choice value="graphfruit"> Graphfruit </choice>
+              <choice value="pitaya"> Pitaya </choice>
+          </choices>
     br
     hr
     h4 Multiple Choice
@@ -52,11 +52,11 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          &lt;choices multiple ng-model="fruit2"&gt;
-              &lt;choice value="banana"&gt; Banana &lt;/choice&gt;
-              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
-              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
-          &lt;/choices&gt;
+          <choices multiple ng-model="fruit2">
+              <choice value="banana"> Banana </choice>
+              <choice value="graphfruit"> Graphfruit </choice>
+              <choice value="pitaya"> Pitaya </choice>
+          </choices>
     br
     hr
     h4 Multiple Choice with Default Values
@@ -73,11 +73,11 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          &lt;choices multiple ng-model="fruit3"&gt;
-              &lt;choice value="banana" active&gt; Banana &lt;/choice&gt;
-              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
-              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
-          &lt;/choices&gt;
+          <choices multiple ng-model="fruit3">
+              <choice value="banana" active> Banana </choice>
+              <choice value="graphfruit"> Graphfruit </choice>
+              <choice value="pitaya"> Pitaya </choice>
+          </choices>
     br
     hr
     h4 Multiple Choice with Fallback Value
@@ -94,13 +94,14 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          &lt;choices multiple ng-model="fruit4"&gt;
-              &lt;choice value="banana" fallback active&gt; Banana &lt;/choice&gt;
-              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
-              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
-          &lt;/choices&gt;
+          <choices multiple ng-model="fruit4">
+              <choice value="banana" fallback active> Banana </choice>
+              <choice value="graphfruit"> Graphfruit </choice>
+              <choice value="pitaya"> Pitaya </choice>
+          </choices>
     br
     hr
+
     h4 Change Button Style
     .row
       .col-sm-4
@@ -115,11 +116,11 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          &lt;choices multiple btn-type="btn-danger" ng-model="fruit5"&gt;
-              &lt;choice value="banana" fallback active btn-type="btn-success"&gt; Banana &lt;/choice&gt;
-              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
-              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
-          &lt;/choices&gt;
+          <choices multiple btn-type="btn-danger" ng-model="fruit5">
+              <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
+              <choice value="graphfruit"> Graphfruit </choice>
+              <choice value="pitaya"> Pitaya </choice>
+          </choices>
     br
     hr
 
@@ -137,11 +138,11 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          &lt;choices multiple data-type="array" btn-type="btn-danger" ng-model="fruit6"&gt;
-              &lt;choice value="banana" fallback active btn-type="btn-success"&gt; Banana &lt;/choice&gt;
-              &lt;choice value="graphfruit"&gt; Graphfruit &lt;/choice&gt;
-              &lt;choice value="pitaya"&gt; Pitaya &lt;/choice&gt;
-          &lt;/choices&gt;
+          <choices multiple data-type="array" btn-type="btn-danger" ng-model="fruit6">
+              <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
+              <choice value="graphfruit"> Graphfruit </choice>
+              <choice value="pitaya"> Pitaya </choice>
+          </choices>
     hr
     br
 
@@ -165,17 +166,54 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          &lt;choices ng-model="fruit7"&gt;
-              &lt;choice value="banana" btn-type="btn-success"&gt;
-                &lt;i class="glyphicon glyphicon-ok"&gt;&lt;/i&gt; Banana
-              &lt;/choice&gt;
-              &lt;choice value="graphfruit" btn-type="btn-warning"&gt;
-                &lt;i class="glyphicon glyphicon-exclamation-sign"&gt;&lt;/i&gt; Graphfruit
-              &lt;/choice&gt;
-              &lt;choice value="pitaya" btn-type="btn-danger"&gt;
-                &lt;i class="glyphicon glyphicon-remove"&gt;&lt;/i&gt; Pitaya
-              &lt;/choice&gt;
-          &lt;/choices&gt;
+          <choices ng-model="fruit7">
+              <choice value="banana" btn-type="btn-success">
+                <i class="glyphicon glyphicon-ok"></i> Banana
+              </choice>
+              <choice value="graphfruit" btn-type="btn-warning">
+                <i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit
+              </choice>
+              <choice value="pitaya" btn-type="btn-danger">
+                <i class="glyphicon glyphicon-remove"></i> Pitaya
+              </choice>
+          </choices>
+    hr
+    br
+
+    .row
+      .col-sm-4
+        h4 Binding on Single Button
+        choices(ng-model="fruit8")
+          choice(value="banana",btn-type="btn-success",ng-model="isBananaChosen")
+            i.glyphicon.glyphicon-ok
+            |  Banana
+          choice(value="graphfruit",btn-type="btn-warning")
+            i.glyphicon.glyphicon-exclamation-sign
+            |  Graphfruit
+          choice(value="Pitaya",btn-type="btn-danger")
+            i.glyphicon.glyphicon-remove
+            |  Pitaya
+        .sep
+        h4 Your Choice:
+        blockquote
+          | {{fruit7}}
+        h4 Is Banana Chosen?
+        blockquote
+          | {{isBananaChosen}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          <choices ng-model="fruit8">
+              <choice value="banana" btn-type="btn-success" ng-model="isBananaChosen">
+                <i class="glyphicon glyphicon-ok"></i> Banana
+              </choice>
+              <choice value="graphfruit" btn-type="btn-warning">
+                <i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit
+              </choice>
+              <choice value="pitaya" btn-type="btn-danger">
+                <i class="glyphicon glyphicon-remove"></i> Pitaya
+              </choice>
+          </choices>
     hr
     br
 
