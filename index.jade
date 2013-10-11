@@ -22,7 +22,7 @@ html
     hr
     h4 Your Choices:
     blockquote
-      | {{transportation}}
+      | {{fruit1}}
     hr
     br
 
@@ -35,20 +35,46 @@ html
     hr
     h4 Your Choice:
     blockquote
-      | {{fruit}}
+      | {{fruit2}}
     hr
     br
 
     h4 Multiple Choice with Default Values
     hr
-    choices(id="my-choice-2", multiple, ng-model="fruit3")
+    choices(id="my-choice-3", multiple, ng-model="fruit3")
       choice(value="banana",active) Banana
       choice(value="graphfruit") Graphfruit
       choice(value="Pitaya") Pitaya
     hr
     h4 Your Choice:
     blockquote
-      | {{fruit}}
+      | {{fruit3}}
+    hr
+    br
+
+    h4 Multiple Choice with Fallback Value
+    hr
+    choices(id="my-choice-4", multiple, ng-model="fruit4")
+      choice(value="banana",fallback, active) Banana
+      choice(value="graphfruit") Graphfruit
+      choice(value="Pitaya") Pitaya
+    hr
+    h4 Your Choice:
+    blockquote
+      | {{fruit4}}
+    hr
+    br
+
+    h4 Change Button Style
+    hr
+    choices(id="my-choice-5", multiple, btn-type="btn-danger", ng-model="fruit5")
+      choice(value="banana",fallback, active) Banana
+      choice(value="graphfruit") Graphfruit
+      choice(value="Pitaya") Pitaya
+    hr
+    h4 Your Choice:
+    blockquote
+      | {{fruit5}}
     hr
     br
 
