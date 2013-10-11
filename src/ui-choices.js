@@ -11,6 +11,7 @@ angular.module('ui.choices', []).directive('choices', function($compile){
     template: "<div class='btn-group' ng-transclude></div>",
     link: function(s, e, a){
       var update;
+      s.type = a['type'];
       update = function(s, e, v){
         var ref$, d, k, res$;
         ref$ = [s.data, (v && s.data[v]) || {}], d = ref$[0], v = ref$[1];

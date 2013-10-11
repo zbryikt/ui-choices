@@ -8,6 +8,7 @@ angular.module \ui.choices, <[]>
     template: "<div class='btn-group' ng-transclude></div>"
 
     link: (s, e, a) ->
+      s.type = a[\type]
       update = (s, e, v) ->
         [d,v] = [s.data, (v and s.data[v]) or {}]
         k = [k for k of d]
