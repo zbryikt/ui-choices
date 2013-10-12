@@ -3,6 +3,31 @@
 }
 .sep {
   width: 100%; border-bottom: 1px dashed #ccc; margin: 10px;
+}
+.btn-list {
+  display: block;
+  clear: both;
+  background: none;
+  border: none;
+  color: #000;
+  box-shadow: none!important;
+}
+.btn-list:before {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 7px;
+  border: 1px solid rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+  margin: 2px 3px 0 0;
+  veretical-align: text-top;
+  content: " ";
+}
+.btn-list.active {
+  box-shadow: none;
+}
+.btn-list.active:before {
+  background: #092;
 }</style></head><body ng-app="myapp" ng-controller="myctrl"><h2>ui-choices example</h2><hr><h4>Basic Button Group - Single Choice</h4><div class="row"><div class="col-sm-4"><choices ng-model="fruit1"><choice value="banana">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="pitaya">Pitaya</choice></choices><div class="sep"></div><h4>Your Choices:</h4><blockquote>{{fruit1}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit1&quot;&gt;
     &lt;choice value=&quot;banana&quot;&gt; Banana &lt;/choice&gt;
     &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
@@ -46,5 +71,15 @@
     &lt;/choice&gt;
     &lt;choice value=&quot;pitaya&quot; btn-type=&quot;btn-danger&quot;&gt;
       &lt;i class=&quot;glyphicon glyphicon-remove&quot;&gt;&lt;/i&gt; Pitaya
+    &lt;/choice&gt;
+&lt;/choices&gt;</pre></div></div><hr><br><h4>Advanced Example: Questionarie</h4><div class="row"><div class="col-sm-4"><h5>Which one is your favorite fruit?</h5><choices ng-model="fruit9" btn-type="btn-list"><choice value="banana"> Banana</choice><choice value="graphfruit"> Graphfruit</choice><choice value="Pitaya"> Pitaya</choice></choices><div class="sep"></div><h4>Your Choice:</h4><blockquote>{{fruit9}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit9&quot; btn-type=&quot;btn-list&quot;&gt;
+    &lt;choice value=&quot;banana&quot;&gt;
+      Banana
+    &lt;/choice&gt;
+    &lt;choice value=&quot;graphfruit&quot;&gt;
+      Graphfruit
+    &lt;/choice&gt;
+    &lt;choice value=&quot;pitaya&quot;&gt;
+      Pitaya
     &lt;/choice&gt;
 &lt;/choices&gt;</pre></div></div><hr><br>This angular module 'ui-choices' is specific for bootstrap 3.0. Source code can be found at <a href="http://github.com/zbryikt/ui-choices/">http://github.com/zbryikt/ui-choices/</a></body></html>

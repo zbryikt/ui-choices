@@ -14,6 +14,31 @@ html
       .sep {
         width: 100%; border-bottom: 1px dashed #ccc; margin: 10px;
       }
+      .btn-list {
+        display: block;
+        clear: both;
+        background: none;
+        border: none;
+        color: #000;
+        box-shadow: none!important;
+      }
+      .btn-list:before {
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        border-radius: 7px;
+        border: 1px solid rgba(0,0,0,0.5);
+        box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+        margin: 2px 3px 0 0;
+        veretical-align: text-top;
+        content: " ";
+      }
+      .btn-list.active {
+        box-shadow: none;
+      }
+      .btn-list.active:before {
+        background: #092;
+      }
   body(ng-app="myapp",ng-controller="myctrl")
     h2 ui-choices example
     hr
@@ -212,6 +237,38 @@ html
               </choice>
               <choice value="pitaya" btn-type="btn-danger">
                 <i class="glyphicon glyphicon-remove"></i> Pitaya
+              </choice>
+          </choices>
+    hr
+    br
+
+    h4 Styling: Questionarie
+    .row
+      .col-sm-4
+        h5 Which one is your favorite fruit?
+        choices(ng-model="fruit9", btn-type="btn-list")
+          choice(value="banana")
+            |  Banana
+          choice(value="graphfruit")
+            |  Graphfruit
+          choice(value="Pitaya")
+            |  Pitaya
+        .sep
+        h4 Your Choice:
+        blockquote
+          | {{fruit9}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          <choices ng-model="fruit9" btn-type="btn-list">
+              <choice value="banana">
+                Banana
+              </choice>
+              <choice value="graphfruit">
+                Graphfruit
+              </choice>
+              <choice value="pitaya">
+                Pitaya
               </choice>
           </choices>
     hr
