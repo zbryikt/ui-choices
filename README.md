@@ -1,18 +1,28 @@
 ui-choices
 ==========
 
-Angular bound, bootstrap style (multiple) choice button group directive. It works on Bootstrap 3.0.
+Angularjs binding for bootstrap-style (multiple) choice button group directive. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons.
+
+'ui-choices' is written in livescript and sass.
+
+
+Example
+----------
+A live demo is available [here](http://zbryikt.github.io/ui-choices/).
 
 
 Requirements
 ----------
-* AngularJS
-* JQuery
-* Bootstrap (3.0+)
+* AngularJS (1.0.8+)
+* JQuery (1.10.2+)
+* Bootstrap (optional, 3.0+)
+
 
 Download
 ----------
-You can find the js file [here](https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js).
+You can find the js file [here](https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js). 
+
+Optionally you can use [the css file](https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css) to style your button instead of using bootstrap. In this case bootstrap won't be a requirement. You can also use [this sass file](https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.sass) to generate your css file.
 
 
 Usage
@@ -107,11 +117,6 @@ You can bind data to state of specific button:
       <choice value="car"> Car
       <choice value="trunk"> Trunk
     </choices>
-
-
-Example
-----------
-You can find a live demo [here](http://zbryikt.github.io/ui-choices/)
 
 
 License
