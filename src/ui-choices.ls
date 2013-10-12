@@ -13,8 +13,9 @@ angular.module \ui.choices, <[]>
         [d,v] = [s.data, (v and s.data[v]) or {}]
         k = [k for k of d]
         if v.fb or (!s.multi and v.e) =>
-          k.map -> d[it]on = false
-          v.on = true
+          if v.on =>
+            k.map -> d[it]on = false
+            v.on = true
         else if v.e =>
           k.filter(->d[it]fb)map -> d[it]on = false
           if k.filter(->d[it]on).length==0 =>
@@ -55,6 +56,10 @@ angular.module \ui.choices, <[]>
         add: (e,a) ->
           v = a[\value]
           @d[v] = {} <<< {e, v, m: a[\ngModel], fb: a[\fallback]!=undefined, on: a[\active]!=undefined}
+          $scope.$parent.$watch a[\ngModel], (u) ~>
+            @d[v]on = u
+            setTimeout (~> e.parent!trigger \update, @d[v]v), 0
+            #if d => e.addClass \active else => e.removeClass \active
         tgl: (v) -> @d[v]on = !@d[v]on
       $scope.data = @node.d
       @is-multi = -> $scope.multi

@@ -21,10 +21,12 @@ angular.module('ui.choices', []).directive('choices', function($compile){
         }
         k = res$;
         if (v.fb || (!s.multi && v.e)) {
-          k.map(function(it){
-            return d[it].on = false;
-          });
-          v.on = true;
+          if (v.on) {
+            k.map(function(it){
+              return d[it].on = false;
+            });
+            v.on = true;
+          }
         } else if (v.e) {
           k.filter(function(it){
             return d[it].fb;
@@ -115,15 +117,21 @@ angular.module('ui.choices', []).directive('choices', function($compile){
       this.node = {
         d: {},
         add: function(e, a){
-          var v;
+          var v, this$ = this;
           v = a['value'];
-          return this.d[v] = {
+          this.d[v] = {
             e: e,
             v: v,
             m: a['ngModel'],
             fb: a['fallback'] !== undefined,
             on: a['active'] !== undefined
           };
+          return $scope.$parent.$watch(a['ngModel'], function(u){
+            this$.d[v].on = u;
+            return setTimeout(function(){
+              return e.parent().trigger('update', this$.d[v].v);
+            }, 0);
+          });
         },
         tgl: function(v){
           return this.d[v].on = !this.d[v].on;
