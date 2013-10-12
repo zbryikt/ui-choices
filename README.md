@@ -49,6 +49,11 @@ In above example, checked values will be saved in "my-choices" as an object; for
 
 Then my-choices will be { "bike": true, "car": false, "trunk": true } if Trunk and Bike are chosen.
 
+You can alseo use a single button with "toggle" directive:
+
+    <toggle class="btn-primary" ng-model="my-btn-state"/>
+
+
 Options
 ==========
 
