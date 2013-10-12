@@ -1,4 +1,18 @@
 angular.module \ui.choices, <[]>
+.directive \toggle ($compile) ->
+  return
+    restrict: 'E'
+    replace: true
+    transclude: true
+    template: "<button class='btn' ng-transclude></button>"
+    scope: {model: '=ngModel', id: '='}
+    link: (s,e,a) ->
+      if a[\ngModel] =>
+        e.on \click ->
+          e["#{if (s.model = !s.model) => \add else \remove}Class"] \active
+          s.$apply!
+        s.$watch \model (v) -> e["#{if v => \add else \remove}Class"] \active
+          
 .directive \choices ($compile) ->
   return
     restrict: 'E'
