@@ -48,7 +48,7 @@ html
     | This angular module 'ui-choices' is specific for bootstrap 3.0. Source code can be found at 
     a(href="http://github.com/zbryikt/ui-choices/") http://github.com/zbryikt/ui-choices/
     | . Here shows some examples about how to use ui-choices in various ways.
-    
+
     hr
     h4 Basic Button Group - Single Choice
     .row
@@ -176,8 +176,8 @@ html
               <choice value="graphfruit"> Graphfruit </choice>
               <choice value="pitaya"> Pitaya </choice>
           </choices>
-    hr
     br
+    hr
 
     .row
       .col-sm-4
@@ -210,8 +210,8 @@ html
                 <i class="glyphicon glyphicon-remove"></i> Pitaya
               </choice>
           </choices>
-    hr
     br
+    hr
 
     .row
       .col-sm-4
@@ -247,8 +247,8 @@ html
                 <i class="glyphicon glyphicon-remove"></i> Pitaya
               </choice>
           </choices>
-    hr
     br
+    hr
 
     .row
       .col-sm-4
@@ -302,6 +302,18 @@ html
           }
           .btn-list.active { box-shadow: none; }
           .btn-list.active:before { background: #092; }
-
-    hr
     br
+    hr
+
+    h4 Single Toggle Button
+    .row
+      .col-sm-4
+        toggle.btn-success(ng-model="fruit10") I love Fruit
+        .sep
+        h5 Button Toggled?:
+        blockquote
+          | {{fruit10}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          <toggle class="btn-primary" ng-model="fruit10"/>
