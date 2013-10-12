@@ -8,6 +8,7 @@ angular.module \ui.choices, <[]>
     scope: {model: '=ngModel', id: '='}
     link: (s,e,a) ->
       if a[\ngModel] =>
+        s.model = !!s.model
         e.on \click ->
           e["#{if (s.model = !s.model) => \add else \remove}Class"] \active
           s.$apply!
