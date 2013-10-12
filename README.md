@@ -20,7 +20,7 @@ Requirements
 
 Download
 ----------
-You can find the js file [here](https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js). 
+You can find the js file [here](https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js). ( there is also a [minified version](https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.min.js) )
 
 Optionally you can use [the css file](https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css) to style your button instead of using bootstrap. In this case bootstrap won't be a requirement. You can also use [this sass file](https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.sass) to generate your css file.
 
