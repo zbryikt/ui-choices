@@ -20,39 +20,30 @@ angular.module('ui.choices', []).directive('choices', function($compile){
           res$.push(k);
         }
         k = res$;
-        if (v.fb || (!s.multi && v.e)) {
-          if (v.on) {
+        if (v.e) {
+          if ((v.fb || !s.multi) && v.on) {
             k.map(function(it){
               return d[it].on = false;
             });
             v.on = true;
-          }
-        } else if (v.e) {
-          k.filter(function(it){
-            return d[it].fb;
-          }).map(function(it){
-            return d[it].on = false;
-          });
-          if (k.filter(function(it){
-            return d[it].on;
-          }).length === 0) {
-            fb = k.filter(function(it){
+          } else {
+            (fb = k.filter(function(it){
               return d[it].fb;
+            })).map(function(it){
+              return d[it].on = false;
             });
-            if (fb.length) {
+            if (!k.filter(function(it){
+              return d[it].on;
+            }).length && fb.length) {
               d[fb[0]].on = true;
             }
           }
         }
-        k.map(function(it){
-          if (d[it].m) {
-            s.$parent[d[it].m] = d[it].on;
+        k.map(function(i){
+          if (d[i].m) {
+            s.$parent[d[i].m] = d[i].on;
           }
-          if (d[it].on) {
-            return d[it].e.addClass('active');
-          } else {
-            return d[it].e.removeClass('active');
-          }
+          return d[i].e[(d[i].on ? 'add' : 'remove') + "Class"]('active');
         });
         if (s.type === "array") {
           return s.model = k.filter(function(it){
@@ -97,13 +88,7 @@ angular.module('ui.choices', []).directive('choices', function($compile){
         }
         for (k in ref$ = s.data) {
           v = ref$[k];
-          if (in$(k, d)) {
-            v.on = true;
-            v.e.addClass('active');
-          } else {
-            v.on = false;
-            v.e.removeClass('active');
-          }
+          v.e[((v.on = in$(k, d)) ? 'add' : 'remove') + "Class"]('active');
           if (v.m) {
             results$.push(s.$parent[v.m] = v.on);
           }
