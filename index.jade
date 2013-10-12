@@ -53,13 +53,36 @@ html
       img(style="position: absolute; top: 0; right: 0; border: 0;",src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png",alt="Fork me on GitHub")
 
     h1 ui-choices
-    | angularjs binding for bootstrap 3.0 button group
+    | angularjs binding for bootstrap-style button group
     hr
-
-    | This angular module 'ui-choices' is specific for bootstrap 3.0. Source code can be found at 
+    h4 Abstract
+    | This angular module 'ui-choices' help you build up button groups in simple direcitve. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons. ui-choices also provides 
+    a(href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css") a css file
+    |  ( compiled from 
+    a(href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.sass") a sass file
+    |  ) that can be used independently to any other frameworks. Source code can be found at 
     a(href="http://github.com/zbryikt/ui-choices/") http://github.com/zbryikt/ui-choices/
     | . Here shows some examples about how to use ui-choices in various ways.
-
+    br
+    br
+    hr
+    h4 0. Preparation
+    | Include angular.js, 
+    a(href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js") ui-choices.js
+    |  and bootstrap.css ( or 
+    a(href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css") ui-choices.css
+    |  as an alternative ):
+    br
+    br
+    pre.
+      <head>
+        ...
+        <link rel="stylesheet" type="text/css" href="ui-choices.css"/>
+        <script type="text/javascript" src="your-path-to/angular.js"></script>
+        <script type="text/javascript" src="your-path-to/ui-choices.js"></script>
+        ...
+      </head>
+    br
     hr
     h4 1. Basic Button Group - Single Choice
     .row
