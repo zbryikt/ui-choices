@@ -12,19 +12,16 @@ angular.module \ui.choices, <[]>
       update = (s, e, v) ->
         [d,v] = [s.data, (v and s.data[v]) or {}]
         k = [k for k of d]
-        if v.fb or (!s.multi and v.e) =>
-          if v.on =>
+        if v.e =>
+          if (v.fb or !s.multi) and v.on =>
             k.map -> d[it]on = false
             v.on = true
-        else if v.e =>
-          k.filter(->d[it]fb)map -> d[it]on = false
-          if k.filter(->d[it]on).length==0 =>
-            fb = k.filter(->d[it]fb)
-            if fb.length => d[fb.0]on = true
-        k.map -> 
-          if d[it]m => s.$parent[d[it]m] = d[it]on
-          if d[it]on => d[it]e.addClass \active
-          else d[it]e.removeClass \active
+          else
+            (fb = k.filter(->d[it]fb))map -> d[it]on = false
+            if !k.filter(->d[it]on)length and fb.length => d[fb.0]on = true
+        k.map (i) -> 
+          if d[i]m => s.$parent[d[i]m] = d[i]on
+          d[i]e["#{if d[i]on => \add else \remove}Class"] \active
         if s.type == "array" => s.model = k.filter(->d[it]on)map -> d[it]v
         else 
           s.model = {}
@@ -37,14 +34,9 @@ angular.module \ui.choices, <[]>
       s.$watch \model, (d) ->
         if !d or (!d.length and s.type=="array") => return
         if s.type=="array" => d = ["#{x}" for x in d]
-        else d = [k for k of d].filter(-> d[it])
+        else d = [k for k of d]filter(-> d[it])
         for k,v of s.data
-          if k in d => 
-            v.on = true
-            v.e.addClass \active
-          else 
-            v.on = false
-            v.e.removeClass \active
+          v.e["#{if v.on = (k in d) => \add else \remove}Class"] \active
           if v.m => s.$parent[v.m] = v.on
       ,true
 
@@ -55,11 +47,10 @@ angular.module \ui.choices, <[]>
         d: {}
         add: (e,a) ->
           v = a[\value]
-          @d[v] = {} <<< {e, v, m: a[\ngModel], fb: a[\fallback]!=undefined, on: a[\active]!=undefined}
+          @d[v] = {e, v, m: a[\ngModel], fb: a[\fallback]!=undefined, on: a[\active]!=undefined}
           $scope.$parent.$watch a[\ngModel], (u) ~>
             @d[v]on = u
             setTimeout (~> e.parent!trigger \update, @d[v]v), 0
-            #if d => e.addClass \active else => e.removeClass \active
         tgl: (v) -> @d[v]on = !@d[v]on
       $scope.data = @node.d
       @is-multi = -> $scope.multi
