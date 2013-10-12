@@ -53,6 +53,9 @@ You can alseo use a single button with "toggle" directive:
 
     <toggle class="btn-primary" ng-model="my-btn-state"/>
 
+Similarly, you can use "active" to toggle the button by default:
+
+    <toggle class="btn-primary" ng-model="my-btn-state" active/>
 
 Options
 ==========

@@ -11,7 +11,7 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
     },
     link: function(s, e, a){
       if (a['ngModel']) {
-        s.model = !!s.model;
+        s.model = a['active'] !== undefined || !!s.model;
         e.on('click', function(){
           e[((s.model = !s.model) ? 'add' : 'remove') + "Class"]('active');
           return s.$apply();
