@@ -1,6 +1,14 @@
 <!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script><script type="text/javascript" src="src/ui-choices.js"></script><script type="text/javascript" src="app.js"></script><style type="text/css">html, body {
   margin: 0; padding: 20px; width: 100%; height: 100%
 }
+blockquote {
+  width: 100%;
+  min-height: 69px;
+  border: 1px solid #ccc;
+  border-left: 5px solid #ccc;
+  overflow: scroll;
+  border-radius: 8px;
+}
 .sep {
   width: 100%; border-bottom: 1px dashed #ccc; margin: 10px;
 }
@@ -21,31 +29,31 @@
   content: " ";
 }
 .btn-list.active { box-shadow: none; }
-.btn-list.active:before { background: #092; }</style></head><body ng-app="myapp" ng-controller="myctrl"><h2>ui-choices example</h2><hr><h4>Basic Button Group - Single Choice</h4><div class="row"><div class="col-sm-4"><choices ng-model="fruit1"><choice value="banana">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="pitaya">Pitaya</choice></choices><div class="sep"></div><h4>Your Choices:</h4><blockquote>{{fruit1}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit1&quot;&gt;
+.btn-list.active:before { background: #092; }</style></head><body ng-app="myapp" ng-controller="myctrl"><h2>ui-choices</h2>angularjs binding for bootstrap 3.0 button group<hr>This angular module 'ui-choices' is specific for bootstrap 3.0. Source code can be found at <a href="http://github.com/zbryikt/ui-choices/">http://github.com/zbryikt/ui-choices/</a>. Here shows some examples about how to use ui-choices in various ways.<hr><h4>Basic Button Group - Single Choice</h4><div class="row"><div class="col-sm-4"><choices ng-model="fruit1"><choice value="banana">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit1}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit1&quot;&gt;
     &lt;choice value=&quot;banana&quot;&gt; Banana &lt;/choice&gt;
     &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
     &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>Multiple Choice</h4><div class="row"><div class="col-sm-4"><choices multiple ng-model="fruit2"><choice value="banana">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h4>Your Choice:</h4><blockquote>{{fruit2}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple ng-model=&quot;fruit2&quot;&gt;
+&lt;/choices&gt;</pre></div></div><br><hr><h4>Multiple Choice</h4><div class="row"><div class="col-sm-4"><choices multiple ng-model="fruit2"><choice value="banana">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit2}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple ng-model=&quot;fruit2&quot;&gt;
     &lt;choice value=&quot;banana&quot;&gt; Banana &lt;/choice&gt;
     &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
     &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>Multiple Choice with Default Values</h4><div class="row"><div class="col-sm-4"><choices multiple ng-model="fruit3"><choice value="banana" active>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h4>Your Choice:</h4><blockquote>{{fruit3}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple ng-model=&quot;fruit3&quot;&gt;
+&lt;/choices&gt;</pre></div></div><br><hr><h4>Multiple Choice with Default Values</h4><div class="row"><div class="col-sm-4"><choices multiple ng-model="fruit3"><choice value="banana" active>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit3}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple ng-model=&quot;fruit3&quot;&gt;
     &lt;choice value=&quot;banana&quot; active&gt; Banana &lt;/choice&gt;
     &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
     &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>Multiple Choice with Fallback Value</h4><div class="row"><div class="col-sm-4"><choices multiple ng-model="fruit4"><choice value="banana" fallback active>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h4>Your Choice:</h4><blockquote>{{fruit4}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple ng-model=&quot;fruit4&quot;&gt;
+&lt;/choices&gt;</pre></div></div><br><hr><h4>Multiple Choice with Fallback Value</h4><div class="row"><div class="col-sm-4"><choices multiple ng-model="fruit4"><choice value="banana" fallback active>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit4}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple ng-model=&quot;fruit4&quot;&gt;
     &lt;choice value=&quot;banana&quot; fallback active&gt; Banana &lt;/choice&gt;
     &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
     &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>Change Button Style</h4><div class="row"><div class="col-sm-4"><choices multiple btn-type="btn-danger" ng-model="fruit5"><choice value="banana" fallback active btn-type="btn-success">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h4>Your Choice:</h4><blockquote>{{fruit5}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple btn-type=&quot;btn-danger&quot; ng-model=&quot;fruit5&quot;&gt;
+&lt;/choices&gt;</pre></div></div><br><hr><h4>Change Button Style</h4><div class="row"><div class="col-sm-4"><choices multiple btn-type="btn-danger" ng-model="fruit5"><choice value="banana" fallback active btn-type="btn-success">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit5}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple btn-type=&quot;btn-danger&quot; ng-model=&quot;fruit5&quot;&gt;
     &lt;choice value=&quot;banana&quot; fallback active btn-type=&quot;btn-success&quot;&gt; Banana &lt;/choice&gt;
     &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
     &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>Use Array Instead of Hash</h4><div class="row"><div class="col-sm-4"><choices multiple data-type="array" btn-type="btn-danger" ng-model="fruit6"><choice value="banana" fallback active btn-type="btn-success">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h4>Your Choice:</h4><blockquote>{{fruit6}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple data-type=&quot;array&quot; btn-type=&quot;btn-danger&quot; ng-model=&quot;fruit6&quot;&gt;
+&lt;/choices&gt;</pre></div></div><br><hr><h4>Use Array Instead of Hash</h4><div class="row"><div class="col-sm-4"><choices multiple data-type="array" btn-type="btn-danger" ng-model="fruit6"><choice value="banana" fallback active btn-type="btn-success">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit6}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices multiple data-type=&quot;array&quot; btn-type=&quot;btn-danger&quot; ng-model=&quot;fruit6&quot;&gt;
     &lt;choice value=&quot;banana&quot; fallback active btn-type=&quot;btn-success&quot;&gt; Banana &lt;/choice&gt;
     &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
     &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><hr><br><div class="row"><div class="col-sm-4"><h4>Customize Button Content</h4><choices ng-model="fruit7"><choice value="banana" btn-type="btn-success"><i class="glyphicon glyphicon-ok"></i> Banana</choice><choice value="graphfruit" btn-type="btn-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit</choice><choice value="Pitaya" btn-type="btn-danger"><i class="glyphicon glyphicon-remove"></i> Pitaya</choice></choices><div class="sep"></div><h4>Your Choice:</h4><blockquote>{{fruit7}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit7&quot;&gt;
+&lt;/choices&gt;</pre></div></div><hr><br><div class="row"><div class="col-sm-4"><h4>Customize Button Content</h4><choices ng-model="fruit7"><choice value="banana" btn-type="btn-success"><i class="glyphicon glyphicon-ok"></i> Banana</choice><choice value="graphfruit" btn-type="btn-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit</choice><choice value="Pitaya" btn-type="btn-danger"><i class="glyphicon glyphicon-remove"></i> Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit7}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit7&quot;&gt;
     &lt;choice value=&quot;banana&quot; btn-type=&quot;btn-success&quot;&gt;
       &lt;i class=&quot;glyphicon glyphicon-ok&quot;&gt;&lt;/i&gt; Banana
     &lt;/choice&gt;
@@ -55,7 +63,7 @@
     &lt;choice value=&quot;pitaya&quot; btn-type=&quot;btn-danger&quot;&gt;
       &lt;i class=&quot;glyphicon glyphicon-remove&quot;&gt;&lt;/i&gt; Pitaya
     &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><hr><br><div class="row"><div class="col-sm-4"><h4>Binding on Single Button</h4><choices ng-model="fruit8"><choice value="banana" btn-type="btn-success" ng-model="isBananaChosen"><i class="glyphicon glyphicon-ok"></i> Banana</choice><choice value="graphfruit" btn-type="btn-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit</choice><choice value="Pitaya" btn-type="btn-danger"><i class="glyphicon glyphicon-remove"></i> Pitaya</choice></choices><div class="sep"></div><h4>Your Choice:</h4><blockquote>{{fruit8}}</blockquote><h4>Is Banana Chosen?</h4><blockquote>{{isBananaChosen}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit8&quot;&gt;
+&lt;/choices&gt;</pre></div></div><hr><br><div class="row"><div class="col-sm-4"><h4>Binding on Single Button</h4><choices ng-model="fruit8"><choice value="banana" btn-type="btn-success" ng-model="isBananaChosen"><i class="glyphicon glyphicon-ok"></i> Banana</choice><choice value="graphfruit" btn-type="btn-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit</choice><choice value="Pitaya" btn-type="btn-danger"><i class="glyphicon glyphicon-remove"></i> Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit8}}</blockquote><h4>Is Banana Chosen?</h4><blockquote>{{isBananaChosen}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit8&quot;&gt;
     &lt;choice value=&quot;banana&quot; btn-type=&quot;btn-success&quot; ng-model=&quot;isBananaChosen&quot;&gt;
       &lt;i class=&quot;glyphicon glyphicon-ok&quot;&gt;&lt;/i&gt; Banana
     &lt;/choice&gt;
@@ -65,7 +73,7 @@
     &lt;choice value=&quot;pitaya&quot; btn-type=&quot;btn-danger&quot;&gt;
       &lt;i class=&quot;glyphicon glyphicon-remove&quot;&gt;&lt;/i&gt; Pitaya
     &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><hr><br><div class="row"><div class="col-sm-4"><h4>Styling: Questionnaire</h4><div style="border: 1px solid #ccc;border-radius: 8px;padding: 15px"><h5>1. Which one is your favorite fruit?</h5><choices ng-model="fruit9.q1" btn-type="btn-list"><choice value="banana" fallback>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><h5>2. Which one is your favorite food?</h5><choices ng-model="fruit9.q2" btn-type="btn-list"><choice value="sandwich" fallback>Sandwich</choice><choice value="steak">Steak</choice><choice value="hamburger">Hamburger</choice></choices><h5>3. Are you a vegetarian?</h5><choices ng-model="fruit9.q3" btn-type="btn-list"><choice value="yes" fallback>Yes</choice><choice value="no">No</choice></choices></div><div class="sep"></div><h4>Your Choice:</h4><blockquote>{{fruit9}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit9.q1&quot; btn-type=&quot;btn-list&quot;&gt;
+&lt;/choices&gt;</pre></div></div><hr><br><div class="row"><div class="col-sm-4"><h4>Styling: Questionnaire</h4><div style="border: 1px solid #ccc;border-radius: 8px;padding: 15px"><h5>1. Which one is your favorite fruit?</h5><choices ng-model="fruit9.q1" btn-type="btn-list"><choice value="banana" fallback>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><h5>2. Which one is your favorite food?</h5><choices ng-model="fruit9.q2" btn-type="btn-list"><choice value="sandwich" fallback>Sandwich</choice><choice value="steak">Steak</choice><choice value="hamburger">Hamburger</choice></choices><h5>3. Are you a vegetarian?</h5><choices ng-model="fruit9.q3" btn-type="btn-list"><choice value="yes" fallback>Yes</choice><choice value="no">No</choice></choices></div><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit9}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit9.q1&quot; btn-type=&quot;btn-list&quot;&gt;
     &lt;choice value=&quot;banana&quot; fallback&gt; Banana &lt;/choice&gt;
     &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
     &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
@@ -88,4 +96,4 @@
 }
 .btn-list.active { box-shadow: none; }
 .btn-list.active:before { background: #092; }
-</pre></div></div><hr><br>This angular module 'ui-choices' is specific for bootstrap 3.0. Source code can be found at <a href="http://github.com/zbryikt/ui-choices/">http://github.com/zbryikt/ui-choices/</a></body></html>
+</pre></div></div><hr><br></body></html>

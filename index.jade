@@ -11,6 +11,14 @@ html
       html, body {
         margin: 0; padding: 20px; width: 100%; height: 100%
       }
+      blockquote {
+        width: 100%;
+        min-height: 69px;
+        border: 1px solid #ccc;
+        border-left: 5px solid #ccc;
+        overflow: scroll;
+        border-radius: 8px;
+      }
       .sep {
         width: 100%; border-bottom: 1px dashed #ccc; margin: 10px;
       }
@@ -33,7 +41,14 @@ html
       .btn-list.active { box-shadow: none; }
       .btn-list.active:before { background: #092; }
   body(ng-app="myapp",ng-controller="myctrl")
-    h2 ui-choices example
+    h2 ui-choices
+    | angularjs binding for bootstrap 3.0 button group
+    hr
+
+    | This angular module 'ui-choices' is specific for bootstrap 3.0. Source code can be found at 
+    a(href="http://github.com/zbryikt/ui-choices/") http://github.com/zbryikt/ui-choices/
+    | . Here shows some examples about how to use ui-choices in various ways.
+    
     hr
     h4 Basic Button Group - Single Choice
     .row
@@ -43,7 +58,7 @@ html
           choice(value="graphfruit") Graphfruit
           choice(value="pitaya") Pitaya
         .sep
-        h4 Your Choices:
+        h5 Your Choices:
         blockquote
           | {{fruit1}}
       .col-sm-8
@@ -64,7 +79,7 @@ html
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
         .sep
-        h4 Your Choice:
+        h5 Your Choice:
         blockquote
           | {{fruit2}}
       .col-sm-8
@@ -85,7 +100,7 @@ html
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
         .sep
-        h4 Your Choice:
+        h5 Your Choice:
         blockquote
           | {{fruit3}}
       .col-sm-8
@@ -106,7 +121,7 @@ html
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
         .sep
-        h4 Your Choice:
+        h5 Your Choice:
         blockquote
           | {{fruit4}}
       .col-sm-8
@@ -128,7 +143,7 @@ html
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
         .sep
-        h4 Your Choice:
+        h5 Your Choice:
         blockquote
           | {{fruit5}}
       .col-sm-8
@@ -150,7 +165,7 @@ html
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
         .sep
-        h4 Your Choice:
+        h5 Your Choice:
         blockquote
           | {{fruit6}}
       .col-sm-8
@@ -178,7 +193,7 @@ html
             i.glyphicon.glyphicon-remove
             |  Pitaya
         .sep
-        h4 Your Choice:
+        h5 Your Choice:
         blockquote
           | {{fruit7}}
       .col-sm-8
@@ -212,7 +227,7 @@ html
             i.glyphicon.glyphicon-remove
             |  Pitaya
         .sep
-        h4 Your Choice:
+        h5 Your Choice:
         blockquote
           | {{fruit8}}
         h4 Is Banana Chosen?
@@ -255,7 +270,7 @@ html
             choice(value="no") No
 
         .sep
-        h4 Your Choice:
+        h5 Your Choice:
         blockquote
           | {{fruit9}}
       .col-sm-8
@@ -290,6 +305,3 @@ html
 
     hr
     br
-
-    | This angular module 'ui-choices' is specific for bootstrap 3.0. Source code can be found at 
-    a(href="http://github.com/zbryikt/ui-choices/") http://github.com/zbryikt/ui-choices/
