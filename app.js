@@ -3,5 +3,26 @@ var myctrl;
 angular.module('myapp', ['ui.choices']);
 myctrl = function($scope){
   $scope.transportation = [];
-  return $scope.fruit = [];
+  $scope.fruit = [];
+  return $scope.fruit11 = {
+    multi: true,
+    value: {},
+    data: [
+      {
+        name: "Banana",
+        value: 1,
+        fallback: true,
+        btntype: 'btn-primary'
+      }, {
+        name: "Graphfruit",
+        value: 2,
+        fallback: true
+      }, {
+        name: "Pitaya",
+        value: 3,
+        fallback: true,
+        active: true
+      }
+    ]
+  };
 };
