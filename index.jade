@@ -126,7 +126,7 @@ html
     h4 3. Multiple Choice
     .row
       .col-sm-4
-        choices(multiple, ng-model="fruit3")
+        choices(multi, ng-model="fruit3")
           choice(value="banana") Banana
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
@@ -137,7 +137,7 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          <choices multiple ng-model="fruit3">
+          <choices multi ng-model="fruit3">
               <choice value="banana"> Banana </choice>
               <choice value="graphfruit"> Graphfruit </choice>
               <choice value="pitaya"> Pitaya </choice>
@@ -147,7 +147,7 @@ html
     h4 4. Multiple Choice with Default Values
     .row
       .col-sm-4
-        choices(multiple, ng-model="fruit4")
+        choices(multi, ng-model="fruit4")
           choice(value="banana",active) Banana
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
@@ -158,7 +158,7 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          <choices multiple ng-model="fruit4">
+          <choices multi ng-model="fruit4">
               <choice value="banana" active> Banana </choice>
               <choice value="graphfruit"> Graphfruit </choice>
               <choice value="pitaya"> Pitaya </choice>
@@ -168,7 +168,7 @@ html
     h4 5. Multiple Choice with Fallback Value
     .row
       .col-sm-4
-        choices(multiple, ng-model="fruit5")
+        choices(multi, ng-model="fruit5")
           choice(value="banana",fallback, active) Banana
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
@@ -179,7 +179,7 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          <choices multiple ng-model="fruit5">
+          <choices multi ng-model="fruit5">
               <choice value="banana" fallback active> Banana </choice>
               <choice value="graphfruit"> Graphfruit </choice>
               <choice value="pitaya"> Pitaya </choice>
@@ -190,7 +190,7 @@ html
     h4 6. Change Button Style
     .row
       .col-sm-4
-        choices(multiple, btn-type="btn-danger", ng-model="fruit6")
+        choices(multi, btn-type="btn-danger", ng-model="fruit6")
           choice(value="banana",fallback, active, btn-type="btn-success") Banana
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
@@ -201,7 +201,7 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          <choices multiple btn-type="btn-danger" ng-model="fruit6">
+          <choices multi btn-type="btn-danger" ng-model="fruit6">
               <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
               <choice value="graphfruit"> Graphfruit </choice>
               <choice value="pitaya"> Pitaya </choice>
@@ -212,7 +212,7 @@ html
     h4 7. Use Array Instead of Hash
     .row
       .col-sm-4
-        choices(multiple, data-type="array", btn-type="btn-danger", ng-model="fruit7")
+        choices(multi, data-type="array", btn-type="btn-danger", ng-model="fruit7")
           choice(value="banana",fallback, active, btn-type="btn-success") Banana
           choice(value="graphfruit") Graphfruit
           choice(value="Pitaya") Pitaya
@@ -223,7 +223,7 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          <choices multiple data-type="array" btn-type="btn-danger" ng-model="fruit7">
+          <choices multi data-type="array" btn-type="btn-danger" ng-model="fruit7">
               <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
               <choice value="graphfruit"> Graphfruit </choice>
               <choice value="pitaya"> Pitaya </choice>
@@ -362,6 +362,7 @@ html
     h4 11. With 'ng-repeat'
     .row
       .col-sm-4
+        | {{ fruit11.multi }}
         choices(ng-model="fruit11.value",multi="fruit11.multi",btn-type="btn-default")
           choice(ng-repeat="d in fruit11.data",ng-data="d") {{d.name}}
         .sep
@@ -371,7 +372,7 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          <choices ng-model="fruit11.value",multi="fruit11.multi",btn-type="btn-default">
+          <choices ng-model="fruit11.value" multi="fruit11.multi" btn-type="btn-default">
             <choice ng-repeat="d in fruit11.data" ng-data="d"> {{d.name}} </choice>
           </choices>
         h4 Content of fruit11.data
