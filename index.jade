@@ -362,7 +362,6 @@ html
     h4 11. With 'ng-repeat'
     .row
       .col-sm-4
-        | {{ fruit11.multi }}
         choices(ng-model="fruit11.value",multi="fruit11.multi",btn-type="btn-default")
           choice(ng-repeat="d in fruit11.data",ng-data="d") {{d.name}}
         .sep
