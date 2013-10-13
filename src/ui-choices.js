@@ -30,13 +30,14 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
     scope: {
       model: '=ngModel',
       id: '=',
-      multi: '=',
       type: '@'
     },
     template: "<div class='btn-group' ng-transclude></div>",
     link: function(s, e, a){
-      var update;
-      if (!s.multi && a['multi'] === "") {
+      var that, update;
+      if (that = a['multi']) {
+        s.multi = s.$parent[that];
+      } else if (a['multi'] === "") {
         s.multi = true;
       }
       update = function(s, e, v){

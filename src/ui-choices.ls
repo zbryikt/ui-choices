@@ -19,11 +19,12 @@ angular.module \ui.choices, <[]>
     restrict: 'E'
     replace: true
     transclude: true
-    scope: {model: '=ngModel', id: '=', multi: '=', type: '@'}
+    scope: {model: '=ngModel', id: '=', type: '@'}
     template: "<div class='btn-group' ng-transclude></div>"
 
     link: (s, e, a) ->
-      if !s.multi and a[\multi]=="" => s.multi = true
+      if a[\multi] => s.multi = s.$parent[that]
+      else if a[\multi]=="" => s.multi = true
       update = (s, e, v) ->
         [d,v] = [s.data, (v and s.data[v]) or {}]
         k = [k for k of d]

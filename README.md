@@ -51,7 +51,7 @@ You can now use these directives. For example:
 
 In above example, checked values will be saved in "myChoices" as an object; for example, if you choose "Trunk", myChoices will be { "trunk": true }. Multiple choices are also possible:
 
-    <choices ng-model="myChoices" multiple="true">
+    <choices ng-model="myChoices" multi>
       <choice value="bike"> Bike
       <choice value="car"> Car
       <choice value="trunk"> Trunk
@@ -74,7 +74,7 @@ Options
 
 You can configure ui-choices to output array instead of object by adding **data-type="array"** attribute:
 
-    <choices ng-model="myChoices" data-type="array" multiple="true">
+    <choices ng-model="myChoices" data-type="array" multi>
       <choice value="bike"> Bike
       <choice value="car"> Car
       <choice value="trunk"> Trunk
