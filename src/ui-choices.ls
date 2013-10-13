@@ -23,7 +23,7 @@ angular.module \ui.choices, <[]>
     template: "<div class='btn-group' ng-transclude></div>"
 
     link: (s, e, a) ->
-      if a[\multi] => s.multi = s.$parent[that]
+      if a[\multi] => s.multi = s.$parent.$eval that
       else if a[\multi]=="" => s.multi = true
       update = (s, e, v) ->
         [d,v] = [s.data, (v and s.data[v]) or {}]
@@ -36,7 +36,7 @@ angular.module \ui.choices, <[]>
             (fb = k.filter(->d[it]fb))map -> d[it]on = false
             if !k.filter(->d[it]on)length and fb.length => d[fb.0]on = true
         k.map (i) -> 
-          if d[i]m => s.$parent[d[i]m] = d[i]on
+          if d[i]m => s.$parent.$eval "#{d[i]m}=#{d[i]on}"
           d[i]e["#{if d[i]on => \add else \remove}Class"] \active
         if s.type == "array" => s.model = k.filter(->d[it]on)map -> d[it]v
         else 
@@ -53,7 +53,7 @@ angular.module \ui.choices, <[]>
         else d = [k for k of d]filter(-> d[it])
         for k,v of s.data
           v.e["#{if v.on = (k in d) => \add else \remove}Class"] \active
-          if v.m => s.$parent[v.m] = v.on
+          if v.m => s.$parent.$eval "#{v.m}=#{v.on}"
       ,true
 
     controller: ($scope, $element) ->
