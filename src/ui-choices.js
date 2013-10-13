@@ -180,7 +180,7 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
       var ref$, that;
       if (s.d) {
         ref$ = s.d, a.value = ref$.value, a.fallback = ref$.fallback, a.active = ref$.active, a.ngModel = ref$.ngModel;
-        if ((ref$ = s.d.btnType) != null) {
+        if ((ref$ = s.d.btntype) != null) {
           a.btnType = ref$;
         }
       }

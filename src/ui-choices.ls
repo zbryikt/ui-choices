@@ -84,7 +84,7 @@ angular.module \ui.choices, <[]>
     link: (s, e, a, c) ->
       if s.d => 
         a{value,fallback,active,ngModel} = s.d
-        a.btnType? =s.d.btnType
+        a.btnType? =s.d.btntype
       e.addClass if a[\btnType] => that else if c.btntype! => that else \btn-primary
       c.node.add e, a
       e.on \click -> 
