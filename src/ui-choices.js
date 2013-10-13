@@ -36,7 +36,7 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
     link: function(s, e, a){
       var that, update;
       if (that = a['multi']) {
-        s.multi = s.$parent[that];
+        s.multi = s.$parent.$eval(that);
       } else if (a['multi'] === "") {
         s.multi = true;
       }
@@ -69,7 +69,7 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
         }
         k.map(function(i){
           if (d[i].m) {
-            s.$parent[d[i].m] = d[i].on;
+            s.$parent.$eval(d[i].m + "=" + d[i].on);
           }
           return d[i].e[(d[i].on ? 'add' : 'remove') + "Class"]('active');
         });
@@ -118,7 +118,7 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
           v = ref$[k];
           v.e[((v.on = in$(k, d)) ? 'add' : 'remove') + "Class"]('active');
           if (v.m) {
-            results$.push(s.$parent[v.m] = v.on);
+            results$.push(s.$parent.$eval(v.m + "=" + v.on));
           }
         }
         return results$;
