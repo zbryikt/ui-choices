@@ -53,7 +53,17 @@ In above example, checked values will be saved in "myChoices" as an object; for 
       <choice value="trunk"> Trunk
     </choices>
 
-Then myChoices will be { "bike": true, "car": false, "trunk": true } if Trunk and Bike are chosen.
+Then myChoices will be { "bike": true, "car": false, "trunk": true } if Trunk and Bike are chosen. The attribute "multi" can be based on some variable:
+
+
+    <choices ng-model="myChoices" multi="isMulti">
+      <choice value="bike"> Bike
+      <choice value="car"> Car
+      <choice value="trunk"> Trunk
+    </choices>
+
+Then the choice group will be multiple choices when isMulti = true.
+
 
 You can alseo use a single button with "toggle" directive:
 
@@ -127,14 +137,15 @@ You can config a choice element with ng-data directive:
 
 As you may guess, each member in myConfig corresponds to choice's attribute respectively. This is useful when works with ng-repeat:
 
-    <choices ng-model="myChoices.model">
+    <choices ng-model="myChoices.model" multi="myChoices.multi">
       <choice ng-repeat="d in myChoices.data" ng-data="d"> {{d.name}} </choice>
     </choices>
 
 You may have myChoices, for example,  as following:
 
     $scope.myChoices = {
-        model: {}
+        multi: true,
+        model: {},
         data: [
             {name: "Bike",  value: "bike",  fallback: true, btntype: "btn-success"},
             {name: "Car",   value: "car",   active: true},
