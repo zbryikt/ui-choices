@@ -109,15 +109,15 @@ pre {
   content: &quot; &quot;;
 }
 .btn-list.active { box-shadow: none; }
-.btn-list.active:before { background: #092; }</pre></div></div>( * the 'btn-list' class is included in ui-choices.css )<br><br><hr><h4>11. With 'ng-repeat'</h4><div class="row"><div class="col-sm-4"><choices ng-model="fruit11.value" multi="fruit11.multi" btn-type="btn-default"><choice ng-repeat="d in fruit11.data" ng-data="d">{{d.name}}</choice></choices><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit11.value}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit11.value&quot; multi=&quot;fruit11.multi&quot; btn-type=&quot;btn-default&quot;&gt;
+.btn-list.active:before { background: #092; }</pre></div></div>( * the 'btn-list' class is included in ui-choices.css )<br><br><hr><h4>11. With 'ng-repeat'</h4><div class="row"><div class="col-sm-4"><choices ng-model="fruit11.value" btn-type="btn-default"><choice ng-repeat="d in fruit11.data" ng-data="d">{{d.name}}</choice></choices><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit11.value}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit11.value&quot; btn-type=&quot;btn-default&quot;&gt;
   &lt;choice ng-repeat=&quot;d in fruit11.data&quot; ng-data=&quot;d&quot;&gt; {{d.name}} &lt;/choice&gt;
 &lt;/choices&gt;</pre><h4>Content of fruit11.data</h4><pre>... (ignored)
 $scope.fruit11 = {
   multi: true,
   value: {},
   data: [
-    { name: &quot;Banana&quot;, value: 1, fallback: true, btntype: 'btn-primary' },
-    { name: &quot;Graphfruit&quot;, value: 2, fallback: true },
-    { name: &quot;Pitaya&quot;, value: 3, fallback: true , active: true }
+    { name: &quot;Banana&quot;, value: 1, btntype: 'btn-primary' },
+    { name: &quot;Graphfruit&quot;, value: 2 },
+    { name: &quot;Pitaya&quot;, value: 3, active: true }
 ]}
 </pre></div></div><br><hr><div class="footer"></div></body></html>

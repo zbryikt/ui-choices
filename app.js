@@ -4,8 +4,8 @@ angular.module('myapp', ['ui.choices']);
 myctrl = function($scope){
   $scope.transportation = [];
   $scope.fruit = [];
+  $scope.fruit11multi = true;
   return $scope.fruit11 = {
-    multi: true,
     value: {},
     data: [
       {
@@ -15,12 +15,10 @@ myctrl = function($scope){
         btntype: 'btn-primary'
       }, {
         name: "Graphfruit",
-        value: 2,
-        fallback: true
+        value: 2
       }, {
         name: "Pitaya",
         value: 3,
-        fallback: true,
         active: true
       }
     ]
