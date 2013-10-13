@@ -19,11 +19,11 @@ angular.module \ui.choices, <[]>
     restrict: 'E'
     replace: true
     transclude: true
-    scope: {model: '=ngModel', id: '='}
+    scope: {model: '=ngModel', id: '=', multi: '=', type: '@'}
     template: "<div class='btn-group' ng-transclude></div>"
 
     link: (s, e, a) ->
-      s.type = a[\type]
+      if !s.multi and a[\multi]=="" => s.multi = true
       update = (s, e, v) ->
         [d,v] = [s.data, (v and s.data[v]) or {}]
         k = [k for k of d]
@@ -56,16 +56,17 @@ angular.module \ui.choices, <[]>
       ,true
 
     controller: ($scope, $element) ->
-      $scope.multi = !!($element.attr \multiple)
       $scope.btntype = $element.attr \btn-type
       @node = 
         d: {}
         add: (e,a) ->
           v = a[\value]
           @d[v] = {e, v, m: a[\ngModel], fb: a[\fallback]!=undefined, on: a[\active]!=undefined}
-          $scope.$parent.$watch a[\ngModel], (u) ~>
-            @d[v]on = u
-            setTimeout (~> e.parent!trigger \update, @d[v]v), 0
+          if a[\ngModel] =>
+            $scope.$parent.$watch that, (u) ~>
+              @d[v]on = u
+              setTimeout (~> e.parent!trigger \update, @d[v]v), 0
+          setTimeout (~> e.parent!trigger \update, null), 0
         tgl: (v) -> @d[v]on = !@d[v]on
       $scope.data = @node.d
       @is-multi = -> $scope.multi
@@ -78,12 +79,14 @@ angular.module \ui.choices, <[]>
     transclude: true
     replace: true
     require: "^choices"
-    scope: {id: '='}
+    scope: {id: '=', d: '=ngData'}
     template: "<label class='btn'><span ng-transclude></span></label>"
     link: (s, e, a, c) ->
+      if s.d => 
+        a{value,fallback,active,ngModel} = s.d
+        a.btnType? =s.d.btnType
       e.addClass if a[\btnType] => that else if c.btntype! => that else \btn-primary
       c.node.add e, a
       e.on \click -> 
-        r = c.node.tgl v = e.attr \value
+        r = c.node.tgl v = a[\value]
         setTimeout (-> e.parent!trigger \update, v), 0
- 

@@ -29,12 +29,16 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
     transclude: true,
     scope: {
       model: '=ngModel',
-      id: '='
+      id: '=',
+      multi: '=',
+      type: '@'
     },
     template: "<div class='btn-group' ng-transclude></div>",
     link: function(s, e, a){
       var update;
-      s.type = a['type'];
+      if (!s.multi && a['multi'] === "") {
+        s.multi = true;
+      }
       update = function(s, e, v){
         var ref$, d, k, res$, fb;
         ref$ = [s.data, (v && s.data[v]) || {}], d = ref$[0], v = ref$[1];
@@ -120,12 +124,11 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
       }, true);
     },
     controller: function($scope, $element){
-      $scope.multi = !!$element.attr('multiple');
       $scope.btntype = $element.attr('btn-type');
       this.node = {
         d: {},
         add: function(e, a){
-          var v, this$ = this;
+          var v, that, this$ = this;
           v = a['value'];
           this.d[v] = {
             e: e,
@@ -134,12 +137,17 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
             fb: a['fallback'] !== undefined,
             on: a['active'] !== undefined
           };
-          return $scope.$parent.$watch(a['ngModel'], function(u){
-            this$.d[v].on = u;
-            return setTimeout(function(){
-              return e.parent().trigger('update', this$.d[v].v);
-            }, 0);
-          });
+          if (that = a['ngModel']) {
+            $scope.$parent.$watch(that, function(u){
+              this$.d[v].on = u;
+              return setTimeout(function(){
+                return e.parent().trigger('update', this$.d[v].v);
+              }, 0);
+            });
+          }
+          return setTimeout(function(){
+            return e.parent().trigger('update', null);
+          }, 0);
         },
         tgl: function(v){
           return this.d[v].on = !this.d[v].on;
@@ -164,18 +172,25 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
     replace: true,
     require: "^choices",
     scope: {
-      id: '='
+      id: '=',
+      d: '=ngData'
     },
     template: "<label class='btn'><span ng-transclude></span></label>",
     link: function(s, e, a, c){
-      var that;
+      var ref$, that;
+      if (s.d) {
+        ref$ = s.d, a.value = ref$.value, a.fallback = ref$.fallback, a.active = ref$.active, a.ngModel = ref$.ngModel;
+        if ((ref$ = s.d.btnType) != null) {
+          a.btnType = ref$;
+        }
+      }
       e.addClass((that = a['btnType'])
         ? that
         : (that = c.btntype()) ? that : 'btn-primary');
       c.node.add(e, a);
       return e.on('click', function(){
         var r, v;
-        r = c.node.tgl(v = e.attr('value'));
+        r = c.node.tgl(v = a['value']);
         return setTimeout(function(){
           return e.parent().trigger('update', v);
         }, 0);
