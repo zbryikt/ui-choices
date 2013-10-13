@@ -39,21 +39,21 @@ In your angular application, include it as a module:
 
 You can now use these directives. For example:
 
-    <choices ng-model="my-choices">
+    <choices ng-model="myChoices">
       <choice value="bike"> Bike
       <choice value="car"> Car
       <choice value="trunk"> Trunk
     </choices>
 
-In above example, checked values will be saved in "my-choices" as an object; for example, if you choose "Trunk", my-choices will be { "trunk": true }. Multiple choices are also possible:
+In above example, checked values will be saved in "myChoices" as an object; for example, if you choose "Trunk", myChoices will be { "trunk": true }. Multiple choices are also possible:
 
-    <choices ng-model="my-choices" multiple="true">
+    <choices ng-model="myChoices" multiple="true">
       <choice value="bike"> Bike
       <choice value="car"> Car
       <choice value="trunk"> Trunk
     </choices>
 
-Then my-choices will be { "bike": true, "car": false, "trunk": true } if Trunk and Bike are chosen.
+Then myChoices will be { "bike": true, "car": false, "trunk": true } if Trunk and Bike are chosen.
 
 You can alseo use a single button with "toggle" directive:
 
@@ -70,7 +70,7 @@ Options
 
 You can configure ui-choices to output array instead of object by adding **data-type="array"** attribute:
 
-    <choices ng-model="my-choices" data-type="array" multiple="true">
+    <choices ng-model="myChoices" data-type="array" multiple="true">
       <choice value="bike"> Bike
       <choice value="car"> Car
       <choice value="trunk"> Trunk
@@ -82,7 +82,7 @@ In this case, You will get ["bike","car"] if "Bike" and "Car" are chosen.
 
 Use **btn-type** to assign custom css class to buttons:
 
-    <choices ng-model="my-choices" btn-type="btn-link">
+    <choices ng-model="myChoices" btn-type="btn-link">
       <choice value="bike"> Bike
       <choice value="car"> Car
       <choice value="trunk",btn-type="btn-success"> Trunk
@@ -92,7 +92,7 @@ Use **btn-type** to assign custom css class to buttons:
 
 Choice tag with "active" attribute will be activated by default:
 
-    <choices ng-model="my-choices" btn-type="btn-link">
+    <choices ng-model="myChoices" btn-type="btn-link">
       <choice value="bike"> Bike
       <choice value="car",active> Car
       <choice value="trunk"> Trunk
@@ -102,7 +102,7 @@ Choice tag with "active" attribute will be activated by default:
 
 Choice tag with "fallback" attribute will be de-activated while other buttons are activated, and be activated when no buttons are activated:
 
-    <choices ng-model="my-choices" btn-type="btn-link">
+    <choices ng-model="myChoices" btn-type="btn-link">
       <choice value="bike",fallback> Bike
       <choice value="car"> Car
       <choice value="trunk"> Trunk
@@ -112,11 +112,34 @@ Choice tag with "fallback" attribute will be de-activated while other buttons ar
 
 You can bind data to state of specific button:
 
-    <choices ng-model="my-choices">
+    <choices ng-model="myChoices">
       <choice value="bike",ng-model="isBikeChosen"> Bike
       <choice value="car"> Car
       <choice value="trunk"> Trunk
     </choices>
+
+##### init choice with "ng-data" directive
+
+You can config a choice element with ng-data directive:
+
+    <choice ng-data="myConfig"> Bike </choice>
+    myConfig = {value: 1, fallback: false, active: true, btntype: 'btn-default'}
+
+As you may guess, each member in myConfig corresponds to choice's attribute respectively. This is useful when works with ng-repeat:
+
+    <choices ng-model="myChoices.model">
+      <choice ng-repeat="d in myChoices.data" ng-data="d"> {{d.name}} </choice>
+    </choices>
+
+You may have myChoices, for example,  as following:
+
+    $scope.myChoices = {
+        model: {}
+        data: [
+            {name: "Bike",  value: "bike",  fallback: true, btntype: "btn-success"},
+            {name: "Car",   value: "car",   active: true},
+            {name: "Trunk", value: "trunk"}
+    ]};
 
 
 License
