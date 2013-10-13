@@ -3,6 +3,7 @@
 }
 body {
   background: url(fabric.png) #fbfbfb;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 blockquote {
   width: 100%;
@@ -37,7 +38,7 @@ pre {
 }
 .btn-list.active { box-shadow: none; }
 .btn-list.active:before { background: #092; }
-.footer {min-height: 40px;}</style></head><body ng-app="myapp" ng-controller="myctrl"><a href="https://github.com/zbryikt/ui-choices"><img style="position: fixed; z-index: 9999; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a><img src="logo.png" style="float: left"><h1>ui-choices</h1>angularjs binding for bootstrap-style button group<hr><h4>Abstract</h4>This angular module 'ui-choices' help you build up button groups in simple direcitve. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons. ui-choices also provides <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">a css file</a> ( compiled from <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.sass">a sass file</a> ) that can be used independently to any other frameworks. Source code can be found at <a href="http://github.com/zbryikt/ui-choices/">http://github.com/zbryikt/ui-choices/</a>. Here shows some examples about how to use ui-choices in various ways.<br><br><hr><h4>0. Preparation</h4>Include angular.js, <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js">ui-choices.js</a> and bootstrap.css ( or <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">ui-choices.css</a> as an alternative ):<br><br><pre>&lt;head&gt;
+.footer {min-height: 40px; color: #ccc; font-weight: 100; font-family: century gothic; text-align: right}</style></head><body ng-app="myapp" ng-controller="myctrl"><a href="https://github.com/zbryikt/ui-choices"><img style="position: fixed; z-index: 9999; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a><img src="logo.png" style="float: left"><h1>ui-choices</h1>angularjs binding for bootstrap-style button group<hr><h4>Abstract</h4>This angular module 'ui-choices' help you build up button groups in simple direcitve. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons. ui-choices also provides <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">a css file</a> ( compiled from <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.sass">a sass file</a> ) that can be used independently to any other frameworks. Source code can be found at <a href="http://github.com/zbryikt/ui-choices/">http://github.com/zbryikt/ui-choices/</a>. Here shows some examples about how to use ui-choices in various ways.<br><br><hr><h4>0. Preparation</h4>Include angular.js, <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js">ui-choices.js</a> and bootstrap.css ( or <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">ui-choices.css</a> as an alternative ):<br><br><pre>&lt;head&gt;
   ...
   &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;your-path-to/ui-choices.css&quot;/&gt;
   &lt;script type=&quot;text/javascript&quot; src=&quot;your-path-to/angular.js&quot;&gt;&lt;/script&gt;
@@ -109,7 +110,7 @@ pre {
   content: &quot; &quot;;
 }
 .btn-list.active { box-shadow: none; }
-.btn-list.active:before { background: #092; }</pre></div></div>( * the 'btn-list' class is included in ui-choices.css )<br><br><hr><h4>11. With 'ng-repeat'</h4><div class="row"><div class="col-sm-4"><choices ng-model="fruit11.value" btn-type="btn-default" multi="fruit11.multi"><choice ng-repeat="d in fruit11.data" ng-data="d">{{d.name}}</choice></choices><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit11.value}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit11.value&quot; btn-type=&quot;btn-default&quot; multi=&quot;fruit11.multi&quot;&gt;
+.btn-list.active:before { background: #092; }</pre></div></div>( * the 'btn-list' class is included in ui-choices.css )<br><br><hr><div class="row"><div class="col-sm-4"><h4>11. With 'ng-repeat'</h4><choices ng-model="fruit11.value" btn-type="btn-default" multi="fruit11.multi"><choice ng-repeat="d in fruit11.data" ng-data="d">{{d.name}}</choice></choices><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit11.value}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-model=&quot;fruit11.value&quot; btn-type=&quot;btn-default&quot; multi=&quot;fruit11.multi&quot;&gt;
   &lt;choice ng-repeat=&quot;d in fruit11.data&quot; ng-data=&quot;d&quot;&gt; {{d.name}} &lt;/choice&gt;
 &lt;/choices&gt;</pre><h4>Content of fruit11.data</h4><pre>... (ignored)
 $scope.fruit11 = {
@@ -119,5 +120,13 @@ $scope.fruit11 = {
     { name: &quot;Banana&quot;, value: 1, btntype: 'btn-primary' },
     { name: &quot;Graphfruit&quot;, value: 2 },
     { name: &quot;Pitaya&quot;, value: 3, active: true }
-]}
-</pre></div></div><br><hr><div class="footer"></div></body></html>
+]}</pre></div></div><br><hr><h4>12. With 'ng-repeat', both choices and choice</h4><div class="row"><div class="col-sm-4"><choices ng-repeat="c in fruit12" ng-model="c.value" btn-type="btn-list" multi="c.multi"><choice ng-repeat="d in c.data" ng-data="d">{{d.name}}</choice></choices><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit12}}</blockquote></div><div class="col-sm-8"><h4>Source Code</h4><pre>&lt;choices ng-repeat=&quot;c in fruit12&quot;, ng-model=&quot;c.value&quot; btn-type=&quot;btn-list&quot; multi=&quot;c.multi&quot;&gt;
+  &lt;choice ng-repeat=&quot;d in c.data&quot; ng-data=&quot;d&quot;&gt; {{d.name}} &lt;/choice&gt;
+&lt;/choices&gt;</pre><h4>Content of fruit12</h4><pre>$scope.fruit12 = [
+  { multi: true, value: {}, data: [
+    { name: &quot;Banana&quot;, value: 1, fallback: true },
+    { name: &quot;Graphfruit&quot;, value: 2 },
+    { name: &quot;Pitaya&quot;, value: 3, active: true }
+  ]},
+  ... (ignored)
+]</pre></div></div><br><hr><div class="footer">'ui-choices' by <a href="http://tkirby.org">zbryikt</a> @ 2013</div></body></html>

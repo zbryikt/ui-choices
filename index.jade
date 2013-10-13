@@ -13,6 +13,7 @@ html
       }
       body {
         background: url(fabric.png) #fbfbfb;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       }
       blockquote {
         width: 100%;
@@ -47,7 +48,7 @@ html
       }
       .btn-list.active { box-shadow: none; }
       .btn-list.active:before { background: #092; }
-      .footer {min-height: 40px;}
+      .footer {min-height: 40px; color: #ccc; font-weight: 100; font-family: century gothic; text-align: right}
   body(ng-app="myapp",ng-controller="myctrl")
     a(href="https://github.com/zbryikt/ui-choices")
       img(style="position: fixed; z-index: 9999; top: 0; right: 0; border: 0;",src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png",alt="Fork me on GitHub")
@@ -359,9 +360,9 @@ html
     br
     hr
 
-    h4 11. With 'ng-repeat'
     .row
       .col-sm-4
+        h4 11. With 'ng-repeat'
         choices(ng-model="fruit11.value",btn-type="btn-default",multi="fruit11.multi")
           choice(ng-repeat="d in fruit11.data",ng-data="d") {{d.name}}
         .sep
@@ -385,8 +386,38 @@ html
               { name: "Graphfruit", value: 2 },
               { name: "Pitaya", value: 3, active: true }
           ]}
+    br
+    hr
 
+    h4 12. With 'ng-repeat', both choices and choice
+    .row
+      .col-sm-4
+        choices(ng-repeat="c in fruit12", ng-model="c.value",btn-type="btn-list",multi="c.multi")
+          choice(ng-repeat="d in c.data",ng-data="d") {{d.name}}
+        .sep
+        h5 Your Choices:
+        blockquote
+          | {{fruit12}}
+      .col-sm-8
+        h4 Source Code
+        pre.
+          <choices ng-repeat="c in fruit12", ng-model="c.value" btn-type="btn-list" multi="c.multi">
+            <choice ng-repeat="d in c.data" ng-data="d"> {{d.name}} </choice>
+          </choices>
+        h4 Content of fruit12
+        pre.
+          $scope.fruit12 = [
+            { multi: true, value: {}, data: [
+              { name: "Banana", value: 1, fallback: true },
+              { name: "Graphfruit", value: 2 },
+              { name: "Pitaya", value: 3, active: true }
+            ]},
+            ... (ignored)
+          ]
     br
     hr
 
     .footer
+      | 'ui-choices' by 
+      a(href="http://tkirby.org") zbryikt
+      |  @ 2013

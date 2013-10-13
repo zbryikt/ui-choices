@@ -5,7 +5,7 @@ myctrl = function($scope){
   $scope.transportation = [];
   $scope.fruit = [];
   $scope.fruit11multi = true;
-  return $scope.fruit11 = {
+  $scope.fruit11 = {
     multi: true,
     value: {},
     data: [
@@ -24,4 +24,40 @@ myctrl = function($scope){
       }
     ]
   };
+  return $scope.fruit12 = [
+    {
+      multi: true,
+      value: {},
+      data: [
+        {
+          name: "Banana",
+          value: 1,
+          fallback: true
+        }, {
+          name: "Graphfruit",
+          value: 2
+        }, {
+          name: "Pitaya",
+          value: 3,
+          active: true
+        }
+      ]
+    }, {
+      multi: false,
+      value: {},
+      data: [
+        {
+          name: "Apple",
+          value: 1,
+          fallback: true
+        }, {
+          name: "Peach",
+          value: 2
+        }, {
+          name: "Orange",
+          value: 3
+        }
+      ]
+    }
+  ];
 };
