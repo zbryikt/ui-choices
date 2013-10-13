@@ -6,6 +6,7 @@ myctrl = function($scope){
   $scope.fruit = [];
   $scope.fruit11multi = true;
   return $scope.fruit11 = {
+    multi: true,
     value: {},
     data: [
       {

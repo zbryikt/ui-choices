@@ -362,7 +362,7 @@ html
     h4 11. With 'ng-repeat'
     .row
       .col-sm-4
-        choices(ng-model="fruit11.value",btn-type="btn-default")
+        choices(ng-model="fruit11.value",btn-type="btn-default",multi="fruit11.multi")
           choice(ng-repeat="d in fruit11.data",ng-data="d") {{d.name}}
         .sep
         h5 Your Choices:
@@ -371,7 +371,7 @@ html
       .col-sm-8
         h4 Source Code
         pre.
-          <choices ng-model="fruit11.value" btn-type="btn-default">
+          <choices ng-model="fruit11.value" btn-type="btn-default" multi="fruit11.multi">
             <choice ng-repeat="d in fruit11.data" ng-data="d"> {{d.name}} </choice>
           </choices>
         h4 Content of fruit11.data

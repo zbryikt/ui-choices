@@ -5,6 +5,7 @@ myctrl = ($scope) ->
   $scope.fruit = []
   $scope.fruit11multi = true
   $scope.fruit11 =
+    multi: true
     value: {}
     data: [
       { name: "Banana", value: 1, fallback: true, btntype: 'btn-primary' },
