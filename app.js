@@ -26,6 +26,7 @@ myctrl = function($scope){
   };
   return $scope.fruit12 = [
     {
+      name: "breakfast?",
       multi: true,
       value: {},
       data: [
@@ -43,6 +44,7 @@ myctrl = function($scope){
         }
       ]
     }, {
+      name: "lunch?",
       multi: false,
       value: {},
       data: [
@@ -55,6 +57,26 @@ myctrl = function($scope){
           value: 2
         }, {
           name: "Orange",
+          value: 3
+        }
+      ]
+    }, {
+      name: "dinner?",
+      multi: true,
+      value: {
+        1: true,
+        2: true,
+        3: true
+      },
+      data: [
+        {
+          name: "Guava",
+          value: 1
+        }, {
+          name: "Longan",
+          value: 2
+        }, {
+          name: "Litchi",
           value: 3
         }
       ]
