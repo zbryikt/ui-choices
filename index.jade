@@ -2,6 +2,7 @@
 html
   head
     link(rel="stylesheet",type="text/css",href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css")
+    link(rel="stylesheet",type="text/css",href="semantic.min.css")
     script(type="text/javascript",src="//codeorigin.jquery.com/jquery-1.10.2.min.js")
     script(type="text/javascript",src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
     script(type="text/javascript",src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js")
@@ -59,7 +60,7 @@ html
     | angularjs binding for bootstrap-style button group
     hr
     h4 Abstract
-    | This angular module 'ui-choices' help you build up button groups in simple direcitve. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons. ui-choices also provides 
+    | This angular module 'ui-choices' help you build up button groups in simple direcitve. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons. while it is semantic-ui-friendly, too. ui-choices also provides 
     a(href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css") a css file
     |  ( compiled from 
     a(href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.sass") a sass file
@@ -167,6 +168,7 @@ html
           </choices>
     br
     hr
+
     h4 5. Multiple Choice with Fallback Value
     .row
       .col-sm-4
@@ -422,6 +424,65 @@ html
             ]},
             ... (ignored)
           ]
+    br
+    hr
+
+    h4 13. Single Toggle Button ( with Semantic-ui )
+    .row
+      .col-sm-4
+        toggle.ui.button(ng-model="fruit13",active) I love Fruit
+        .sep
+        h5 Button Toggled?:
+        blockquote
+          | {{fruit13}}
+      .col-sm-8
+        h5 Source Code
+        pre.
+          <toggle class="ui button" ng-model="fruit13"/>
+    br
+    hr
+
+    h4 14. Basic Button Group - Single Choice with Default Value ( with Semantic-ui )
+    .row
+      .col-sm-4
+        choices.ui.buttons(ng-model="fruit14",btn-type="ui button")
+          choice(value="banana",active) Banana
+          choice(value="graphfruit") Graphfruit
+          choice(value="pitaya") Pitaya
+        .sep
+        h5 Your Choices:
+        blockquote
+          | {{fruit14}}
+      .col-sm-8
+        h5 Source Code
+        pre.
+          <choices class="ui buttons" ng-model="fruit14" btn-type="ui button">
+              <choice value="banana" active> Banana </choice>
+              <choice value="graphfruit"> Graphfruit </choice>
+              <choice value="pitaya"> Pitaya </choice>
+          </choices>
+    br
+    hr
+
+    h4 15. Multiple Choice with Fallback Value and Styling ( with Semantic-ui )
+    .row
+      .col-sm-4
+        choices.ui.buttons(multi, ng-model="fruit15", btn-type="ui button")
+          choice.green(value="banana",fallback, active) Banana
+          choice(value="graphfruit") Graphfruit
+          choice(value="Pitaya") Pitaya
+        .sep
+        h5 Your Choice:
+        blockquote
+          | {{fruit15}}
+      .col-sm-8
+        h5 Source Code
+        pre.
+          <choices class="ui buttons" multi ng-model="fruit15" btn-type="ui button">
+              <choice class="green" value="banana" fallback active> Banana </choice>
+              <choice value="graphfruit"> Graphfruit </choice>
+              <choice value="pitaya"> Pitaya </choice>
+          </choices>
     br
     hr
 
