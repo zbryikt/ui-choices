@@ -4,12 +4,16 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
     restrict: 'E',
     replace: true,
     transclude: true,
-    template: "<button class='btn' ng-transclude></button>",
+    template: "<button ng-transclude></button>",
     scope: {
       model: '=ngModel',
       id: '='
     },
     link: function(s, e, a){
+      if (!e.hasClass('ui')) {
+        e.addClass('btn');
+      }
+      console.log(e.attr('class'));
       if (a['ngModel']) {
         s.model = a['active'] !== undefined || !!s.model;
         e.on('click', function(){
@@ -32,9 +36,12 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
       id: '=',
       type: '@'
     },
-    template: "<div class='btn-group' ng-transclude></div>",
+    template: "<div ng-transclude></div>",
     link: function(s, e, a){
       var that, update;
+      if (!e.hasClass('ui')) {
+        e.addClass('btn-group');
+      }
       if (that = a['multi']) {
         s.multi = s.$parent.$eval(that);
       } else if (a['multi'] === "") {
@@ -176,9 +183,12 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
       id: '=',
       d: '=ngData'
     },
-    template: "<label class='btn'><span ng-transclude></span></label>",
+    template: "<label><span ng-transclude></span></label>",
     link: function(s, e, a, c){
       var ref$, that;
+      if (!e.hasClass('ui')) {
+        e.addClass('btn');
+      }
       if (s.d) {
         ref$ = s.d, a.value = ref$.value, a.fallback = ref$.fallback, a.active = ref$.active, a.ngModel = ref$.ngModel;
         if ((ref$ = s.d.btntype) != null) {
