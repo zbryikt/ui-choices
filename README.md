@@ -1,7 +1,7 @@
 ui-choices
 ==========
 
-Angularjs binding for bootstrap-style (multiple) choice button group directive. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons.
+Angularjs binding for bootstrap-style/semantic-ui (multiple) choice button group directive. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons.
 
 'ui-choices' is written in livescript and sass.
 
@@ -15,7 +15,7 @@ Requirements
 ----------
 * AngularJS (1.0.8+)
 * JQuery (1.10.2+)
-* Bootstrap (optional, 3.0+)
+* Bootstrap (optional, 3.0+) or Semantic UI (optional, 0.6.4+). (Only on CSS part)
 
 
 Download
@@ -76,6 +76,17 @@ You can alseo use a single button with "toggle" directive:
 Similarly, you can use "active" to toggle the button by default:
 
     <toggle class="btn-primary" ng-model="my-btn-state" active/>
+
+To work with semantic-ui, use their class name directly. For example:
+
+    <toggle class="ui button" ng-model="myChoices">
+
+    <choices class="ui buttons" ng-model="myChoices">
+      <choice class="ui button" value="bike"> Bike
+      <choice class="ui button" value="car"> Car
+      <choice class="ui button" value="trunk"> Trunk
+    </choices>
+
 
 Options
 ==========
