@@ -4,25 +4,28 @@ angular.module \ui.choices, <[]>
     restrict: 'E'
     replace: true
     transclude: true
-    template: "<button class='btn' ng-transclude></button>"
+    template: "<button ng-transclude></button>"
     scope: {model: '=ngModel', id: '='}
     link: (s,e,a) ->
+      if !e.hasClass \ui => e.addClass \btn
+      console.log e.attr \class
       if a[\ngModel] =>
         s.model = a[\active]!=undefined or !!s.model
         e.on \click ->
           e["#{if (s.model = !s.model) => \add else \remove}Class"] \active
           s.$apply!
         s.$watch \model (v) -> e["#{if v => \add else \remove}Class"] \active
-          
+
 .directive \choices ($compile) ->
   return
     restrict: 'E'
     replace: true
     transclude: true
     scope: {model: '=ngModel', id: '=', type: '@'}
-    template: "<div class='btn-group' ng-transclude></div>"
+    template: "<div ng-transclude></div>"
 
     link: (s, e, a) ->
+      if !e.hasClass \ui => e.addClass \btn-group
       if a[\multi] => s.multi = s.$parent.$eval that
       else if a[\multi]=="" => s.multi = true
       update = (s, e, v) ->
@@ -35,15 +38,15 @@ angular.module \ui.choices, <[]>
           else
             (fb = k.filter(->d[it]fb))map -> d[it]on = false
             if !k.filter(->d[it]on)length and fb.length => d[fb.0]on = true
-        k.map (i) -> 
+        k.map (i) ->
           if d[i]m => s.$parent.$eval "#{d[i]m}=#{d[i]on}"
           d[i]e["#{if d[i]on => \add else \remove}Class"] \active
         if s.type == "array" => s.model = k.filter(->d[it]on)map -> d[it]v
-        else 
+        else
           s.model = {}
           k.map -> s.model[it] = !!d[it]on
       update s, e, null
-      
+
       e.on \update (err,t)->
         update s, e, t
         s.$apply!
@@ -58,7 +61,7 @@ angular.module \ui.choices, <[]>
 
     controller: ($scope, $element) ->
       $scope.btntype = $element.attr \btn-type
-      @node = 
+      @node =
         d: {}
         add: (e,a) ->
           v = a[\value]
@@ -81,13 +84,14 @@ angular.module \ui.choices, <[]>
     replace: true
     require: "^choices"
     scope: {id: '=', d: '=ngData'}
-    template: "<label class='btn'><span ng-transclude></span></label>"
+    template: "<label><span ng-transclude></span></label>"
     link: (s, e, a, c) ->
-      if s.d => 
+      if !e.hasClass \ui => e.addClass \btn
+      if s.d =>
         a{value,fallback,active,ngModel} = s.d
         a.btnType? =s.d.btntype
       e.addClass if a[\btnType] => that else if c.btntype! => that else \btn-primary
       c.node.add e, a
-      e.on \click -> 
+      e.on \click ->
         r = c.node.tgl v = a[\value]
         setTimeout (-> e.parent!trigger \update, v), 0
