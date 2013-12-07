@@ -76,6 +76,7 @@ angular.module \ui.choices, <[]>
       @is-multi = -> $scope.multi
       @btntype = -> $scope.btntype
       @scope = -> $scope
+      @
 
 .directive \choice ($compile) ->
   return

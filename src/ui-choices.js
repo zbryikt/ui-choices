@@ -168,9 +168,10 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
       this.btntype = function(){
         return $scope.btntype;
       };
-      return this.scope = function(){
+      this.scope = function(){
         return $scope;
       };
+      return this;
     }
   };
 }).directive('choice', function($compile){
