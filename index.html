@@ -1,26 +1,334 @@
-<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="semantic.min.css"><script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script><script type="text/javascript" src="src/ui-choices.js"></script><script type="text/javascript" src="app.js"></script><style type="text/css">html, body {
-  margin: 0; padding: 20px; width: 100%; height: 100%
-}
-body {
-  background: url(fabric.png) #fbfbfb;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-blockquote {
-  width: 100%;
-  min-height: 69px;
-  border: 1px solid #ccc;
-  border-left: 5px solid #ccc;
-  overflow: scroll;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.7);
-}
-pre {
-  background: rgba(255,255,255,0.8);
-}
-.sep {
-  width: 100%; border-bottom: 1px dashed #ccc; margin: 10px;
-}
-.btn-list {
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="semantic.min.css">
+    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="src/ui-choices.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <style type="text/css">
+      html, body {
+        margin: 0; padding: 20px; width: 100%; height: 100%
+      }
+      body {
+        background: url(fabric.png) #fbfbfb;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+      blockquote {
+        width: 100%;
+        min-height: 69px;
+        border: 1px solid #ccc;
+        border-left: 5px solid #ccc;
+        overflow: scroll;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.7);
+      }
+      pre {
+        background: rgba(255,255,255,0.8);
+      }
+      .sep {
+        width: 100%; border-bottom: 1px dashed #ccc; margin: 10px;
+      }
+      .btn-list {
+        display: block;
+        clear: both; background: none;
+        border: none; color: #000;
+        box-shadow: none!important;
+      }
+      .btn-list:before {
+        display: inline-block;
+        width: 13px; height: 13px;
+        border-radius: 7px;
+        border: 1px solid rgba(0,0,0,0.5);
+        box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+        margin: 2px 3px 0 0;
+        veretical-align: text-top;
+        content: " ";
+      }
+      .btn-list.active { box-shadow: none; }
+      .btn-list.active:before { background: #092; }
+      .group {margin: 0 10px 3px 0; border: 1px solid #ccc; padding: 5px; border-radius: 8px; background: rgba(255,255,255,0.8); }
+      .footer {min-height: 40px; color: #ccc; font-weight: 100; font-family: century gothic; text-align: right}
+    </style>
+  </head>
+  <body ng-app="myapp" ng-controller="myctrl"><a href="https://github.com/zbryikt/ui-choices"><img style="position: fixed; z-index: 9999; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a><img src="logo.png" style="float: left">
+    <h1>ui-choices</h1>angularjs binding for bootstrap-style button group
+    <hr>
+    <h4>Abstract</h4>This angular module 'ui-choices' helps you build up button groups in simple direcitves. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons. It is semantic-ui-friendly, too. ui-choices also provides <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">a css file</a> ( compiled from <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.sass">a sass file</a> ) that can be used independently to any other frameworks. Source code can be found at <a href="http://github.com/zbryikt/ui-choices/">http://github.com/zbryikt/ui-choices/</a>. Here shows some examples about how to use ui-choices in various ways.<br><br>
+    <hr>
+    <h4>0. Preparation</h4>Include angular.js, <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js">ui-choices.js</a> and bootstrap.css ( or <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">ui-choices.css</a> as an alternative ):<br><br>
+    <pre><head>
+  ...
+  <link rel="stylesheet" type="text/css" href="your-path-to/ui-choices.css"/>
+  <script type="text/javascript" src="your-path-to/angular.js"></script>
+  <script type="text/javascript" src="your-path-to/ui-choices.js"></script>
+  ...
+</head></pre><br>
+    <hr>
+    <h4>1. Single Toggle Button</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <toggle ng-model="fruit1" active class="btn-success">I love Fruit</toggle>
+        <div class="sep"></div>
+        <h5>Button Toggled?:</h5>
+        <blockquote>{{fruit1}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><toggle class="btn-success" ng-model="fruit1"/></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>2. Basic Button Group - Single Choice</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices ng-model="fruit2">
+          <choice value="banana">Banana</choice>
+          <choice value="graphfruit">Graphfruit</choice>
+          <choice value="pitaya">Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choices:</h5>
+        <blockquote>{{fruit2}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices ng-model="fruit2">
+    <choice value="banana"> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>3. Multiple Choice</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices multi ng-model="fruit3">
+          <choice value="banana">Banana</choice>
+          <choice value="graphfruit">Graphfruit</choice>
+          <choice value="Pitaya">Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit3}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices multi ng-model="fruit3">
+    <choice value="banana"> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>4. Multiple Choice with Default Values</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices multi ng-model="fruit4">
+          <choice value="banana" active>Banana</choice>
+          <choice value="graphfruit">Graphfruit</choice>
+          <choice value="Pitaya">Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit4}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices multi ng-model="fruit4">
+    <choice value="banana" active> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>5. Multiple Choice with Fallback Value</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices multi ng-model="fruit5">
+          <choice value="banana" fallback active>Banana</choice>
+          <choice value="graphfruit">Graphfruit</choice>
+          <choice value="Pitaya">Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit5}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices multi ng-model="fruit5">
+    <choice value="banana" fallback active> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>6. Change Button Style</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices multi btn-type="btn-danger" ng-model="fruit6">
+          <choice value="banana" fallback active btn-type="btn-success">Banana</choice>
+          <choice value="graphfruit">Graphfruit</choice>
+          <choice value="Pitaya">Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit6}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices multi btn-type="btn-danger" ng-model="fruit6">
+    <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>7. Use Array Instead of Hash</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices multi data-type="array" btn-type="btn-danger" ng-model="fruit7">
+          <choice value="banana" fallback active btn-type="btn-success">Banana</choice>
+          <choice value="graphfruit">Graphfruit</choice>
+          <choice value="Pitaya">Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit7}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices multi data-type="array" btn-type="btn-danger" ng-model="fruit7">
+    <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>7.1 Use Single Value in Single Choice</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices data-type="single" btn-type="btn-danger" ng-model="fruit7_1">
+          <choice value="banana" fallback active btn-type="btn-success">Banana</choice>
+          <choice value="graphfruit">Graphfruit</choice>
+          <choice value="Pitaya">Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit7_1}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices data-type="single" btn-type="btn-danger" ng-model="fruit7_1">
+    <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <div class="row">
+      <div class="col-sm-4">
+        <h4>8. Customize Button Content</h4>
+        <choices ng-model="fruit8">
+          <choice value="banana" btn-type="btn-success"><i class="glyphicon glyphicon-ok"></i> Banana</choice>
+          <choice value="graphfruit" btn-type="btn-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit</choice>
+          <choice value="Pitaya" btn-type="btn-danger"><i class="glyphicon glyphicon-remove"></i> Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit8}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices ng-model="fruit8">
+    <choice value="banana" btn-type="btn-success">
+      <i class="glyphicon glyphicon-ok"></i> Banana
+    </choice>
+    <choice value="graphfruit" btn-type="btn-warning">
+      <i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit
+    </choice>
+    <choice value="pitaya" btn-type="btn-danger">
+      <i class="glyphicon glyphicon-remove"></i> Pitaya
+    </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>9. Binding on Single Button</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices ng-model="fruit9">
+          <choice value="banana" btn-type="btn-success" ng-model="isBananaChosen"><i class="glyphicon glyphicon-ok"></i> Banana</choice>
+          <choice value="graphfruit" btn-type="btn-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit</choice>
+          <choice value="Pitaya" btn-type="btn-danger"><i class="glyphicon glyphicon-remove"></i> Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit9}}</blockquote>
+        <h5>Is Banana Chosen?</h5>
+        <blockquote>{{isBananaChosen}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices ng-model="fruit9">
+    <choice value="banana" btn-type="btn-success" ng-model="isBananaChosen">
+      <i class="glyphicon glyphicon-ok"></i> Banana
+    </choice>
+    <choice value="graphfruit" btn-type="btn-warning">
+      <i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit
+    </choice>
+    <choice value="pitaya" btn-type="btn-danger">
+      <i class="glyphicon glyphicon-remove"></i> Pitaya
+    </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>10. Styling: Questionnaire</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <div style="border: 1px solid #ccc;border-radius: 8px;padding: 15px;background: rgba(255,255,255,0.8);">
+          <h5>1. Which one is your favorite fruit?</h5>
+          <choices ng-model="fruit10.q1" btn-type="btn-list">
+            <choice value="banana" fallback>Banana</choice>
+            <choice value="graphfruit">Graphfruit</choice>
+            <choice value="Pitaya">Pitaya</choice>
+          </choices>
+          <h5>2. Which one is your favorite food?</h5>
+          <choices ng-model="fruit10.q2" btn-type="btn-list">
+            <choice value="sandwich" fallback>Sandwich</choice>
+            <choice value="steak">Steak</choice>
+            <choice value="hamburger">Hamburger</choice>
+          </choices>
+          <h5>3. Are you a vegetarian?</h5>
+          <choices ng-model="fruit10.q3" btn-type="btn-list">
+            <choice value="yes" fallback>Yes</choice>
+            <choice value="no">No</choice>
+          </choices>
+        </div>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit10}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices ng-model="fruit10.q1" btn-type="btn-list">
+    <choice value="banana" fallback> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices>
+... (ignored)</pre>
+        <h5>Stylesheet</h5>
+        <pre>.btn-list {
   display: block;
   clear: both; background: none;
   border: none; color: #000;
@@ -37,106 +345,125 @@ pre {
   content: " ";
 }
 .btn-list.active { box-shadow: none; }
-.btn-list.active:before { background: #092; }
-.group {margin: 0 10px 3px 0; border: 1px solid #ccc; padding: 5px; border-radius: 8px; background: rgba(255,255,255,0.8); }
-.footer {min-height: 40px; color: #ccc; font-weight: 100; font-family: century gothic; text-align: right}</style></head><body ng-app="myapp" ng-controller="myctrl"><a href="https://github.com/zbryikt/ui-choices"><img style="position: fixed; z-index: 9999; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a><img src="logo.png" style="float: left"><h1>ui-choices</h1>angularjs binding for bootstrap-style button group<hr><h4>Abstract</h4>This angular module 'ui-choices' helps you build up button groups in simple direcitves. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons. It is semantic-ui-friendly, too. ui-choices also provides <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">a css file</a> ( compiled from <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.sass">a sass file</a> ) that can be used independently to any other frameworks. Source code can be found at <a href="http://github.com/zbryikt/ui-choices/">http://github.com/zbryikt/ui-choices/</a>. Here shows some examples about how to use ui-choices in various ways.<br><br><hr><h4>0. Preparation</h4>Include angular.js, <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js">ui-choices.js</a> and bootstrap.css ( or <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">ui-choices.css</a> as an alternative ):<br><br><pre>&lt;head&gt;
-  ...
-  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;your-path-to/ui-choices.css&quot;/&gt;
-  &lt;script type=&quot;text/javascript&quot; src=&quot;your-path-to/angular.js&quot;&gt;&lt;/script&gt;
-  &lt;script type=&quot;text/javascript&quot; src=&quot;your-path-to/ui-choices.js&quot;&gt;&lt;/script&gt;
-  ...
-&lt;/head&gt;</pre><br><hr><h4>1. Single Toggle Button</h4><div class="row"><div class="col-sm-4"><toggle ng-model="fruit1" active class="btn-success">I love Fruit</toggle><div class="sep"></div><h5>Button Toggled?:</h5><blockquote>{{fruit1}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;toggle class=&quot;btn-success&quot; ng-model=&quot;fruit1&quot;/&gt;</pre></div></div><br><hr><h4>2. Basic Button Group - Single Choice</h4><div class="row"><div class="col-sm-4"><choices ng-model="fruit2"><choice value="banana">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit2}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices ng-model=&quot;fruit2&quot;&gt;
-    &lt;choice value=&quot;banana&quot;&gt; Banana &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>3. Multiple Choice</h4><div class="row"><div class="col-sm-4"><choices multi ng-model="fruit3"><choice value="banana">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit3}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices multi ng-model=&quot;fruit3&quot;&gt;
-    &lt;choice value=&quot;banana&quot;&gt; Banana &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>4. Multiple Choice with Default Values</h4><div class="row"><div class="col-sm-4"><choices multi ng-model="fruit4"><choice value="banana" active>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit4}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices multi ng-model=&quot;fruit4&quot;&gt;
-    &lt;choice value=&quot;banana&quot; active&gt; Banana &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>5. Multiple Choice with Fallback Value</h4><div class="row"><div class="col-sm-4"><choices multi ng-model="fruit5"><choice value="banana" fallback active>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit5}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices multi ng-model=&quot;fruit5&quot;&gt;
-    &lt;choice value=&quot;banana&quot; fallback active&gt; Banana &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>6. Change Button Style</h4><div class="row"><div class="col-sm-4"><choices multi btn-type="btn-danger" ng-model="fruit6"><choice value="banana" fallback active btn-type="btn-success">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit6}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices multi btn-type=&quot;btn-danger&quot; ng-model=&quot;fruit6&quot;&gt;
-    &lt;choice value=&quot;banana&quot; fallback active btn-type=&quot;btn-success&quot;&gt; Banana &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>7. Use Array Instead of Hash</h4><div class="row"><div class="col-sm-4"><choices multi data-type="array" btn-type="btn-danger" ng-model="fruit7"><choice value="banana" fallback active btn-type="btn-success">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit7}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices multi data-type=&quot;array&quot; btn-type=&quot;btn-danger&quot; ng-model=&quot;fruit7&quot;&gt;
-    &lt;choice value=&quot;banana&quot; fallback active btn-type=&quot;btn-success&quot;&gt; Banana &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><div class="row"><div class="col-sm-4"><h4>8. Customize Button Content</h4><choices ng-model="fruit8"><choice value="banana" btn-type="btn-success"><i class="glyphicon glyphicon-ok"></i> Banana</choice><choice value="graphfruit" btn-type="btn-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit</choice><choice value="Pitaya" btn-type="btn-danger"><i class="glyphicon glyphicon-remove"></i> Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit8}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices ng-model=&quot;fruit8&quot;&gt;
-    &lt;choice value=&quot;banana&quot; btn-type=&quot;btn-success&quot;&gt;
-      &lt;i class=&quot;glyphicon glyphicon-ok&quot;&gt;&lt;/i&gt; Banana
-    &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot; btn-type=&quot;btn-warning&quot;&gt;
-      &lt;i class=&quot;glyphicon glyphicon-exclamation-sign&quot;&gt;&lt;/i&gt; Graphfruit
-    &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot; btn-type=&quot;btn-danger&quot;&gt;
-      &lt;i class=&quot;glyphicon glyphicon-remove&quot;&gt;&lt;/i&gt; Pitaya
-    &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>9. Binding on Single Button</h4><div class="row"><div class="col-sm-4"><choices ng-model="fruit9"><choice value="banana" btn-type="btn-success" ng-model="isBananaChosen"><i class="glyphicon glyphicon-ok"></i> Banana</choice><choice value="graphfruit" btn-type="btn-warning"><i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit</choice><choice value="Pitaya" btn-type="btn-danger"><i class="glyphicon glyphicon-remove"></i> Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit9}}</blockquote><h5>Is Banana Chosen?</h5><blockquote>{{isBananaChosen}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices ng-model=&quot;fruit9&quot;&gt;
-    &lt;choice value=&quot;banana&quot; btn-type=&quot;btn-success&quot; ng-model=&quot;isBananaChosen&quot;&gt;
-      &lt;i class=&quot;glyphicon glyphicon-ok&quot;&gt;&lt;/i&gt; Banana
-    &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot; btn-type=&quot;btn-warning&quot;&gt;
-      &lt;i class=&quot;glyphicon glyphicon-exclamation-sign&quot;&gt;&lt;/i&gt; Graphfruit
-    &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot; btn-type=&quot;btn-danger&quot;&gt;
-      &lt;i class=&quot;glyphicon glyphicon-remove&quot;&gt;&lt;/i&gt; Pitaya
-    &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>10. Styling: Questionnaire</h4><div class="row"><div class="col-sm-4"><div style="border: 1px solid #ccc;border-radius: 8px;padding: 15px;background: rgba(255,255,255,0.8);"><h5>1. Which one is your favorite fruit?</h5><choices ng-model="fruit10.q1" btn-type="btn-list"><choice value="banana" fallback>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><h5>2. Which one is your favorite food?</h5><choices ng-model="fruit10.q2" btn-type="btn-list"><choice value="sandwich" fallback>Sandwich</choice><choice value="steak">Steak</choice><choice value="hamburger">Hamburger</choice></choices><h5>3. Are you a vegetarian?</h5><choices ng-model="fruit10.q3" btn-type="btn-list"><choice value="yes" fallback>Yes</choice><choice value="no">No</choice></choices></div><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit10}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices ng-model=&quot;fruit10.q1&quot; btn-type=&quot;btn-list&quot;&gt;
-    &lt;choice value=&quot;banana&quot; fallback&gt; Banana &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;
-... (ignored)</pre><h5>Stylesheet</h5><pre>.btn-list {
-  display: block;
-  clear: both; background: none;
-  border: none; color: #000;
-  box-shadow: none!important;
-}
-.btn-list:before {
-  display: inline-block;
-  width: 13px; height: 13px;
-  border-radius: 7px;
-  border: 1px solid rgba(0,0,0,0.5);
-  box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
-  margin: 2px 3px 0 0;
-  veretical-align: text-top;
-  content: &quot; &quot;;
-}
-.btn-list.active { box-shadow: none; }
-.btn-list.active:before { background: #092; }</pre></div></div>( * the 'btn-list' class is included in ui-choices.css )<br><br><hr><div class="row"><div class="col-sm-4"><h4>11. With 'ng-repeat'</h4><choices ng-model="fruit11.value" btn-type="btn-default" multi="fruit11.multi"><choice ng-repeat="d in fruit11.data" ng-data="d">{{d.name}}</choice></choices><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit11.value}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices ng-model=&quot;fruit11.value&quot; btn-type=&quot;btn-default&quot; multi=&quot;fruit11.multi&quot;&gt;
-  &lt;choice ng-repeat=&quot;d in fruit11.data&quot; ng-data=&quot;d&quot;&gt; {{d.name}} &lt;/choice&gt;
-&lt;/choices&gt;</pre><h5>Content of fruit11.data</h5><pre>... (ignored)
+.btn-list.active:before { background: #092; }</pre>
+      </div>
+    </div>( * the 'btn-list' class is included in ui-choices.css )<br><br>
+    <hr>
+    <div class="row">
+      <div class="col-sm-4">
+        <h4>11. With 'ng-repeat'</h4>
+        <choices ng-model="fruit11.value" btn-type="btn-default" multi="fruit11.multi">
+          <choice ng-repeat="d in fruit11.data" ng-data="d">{{d.name}}</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choices:</h5>
+        <blockquote>{{fruit11.value}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices ng-model="fruit11.value" btn-type="btn-default" multi="fruit11.multi">
+  <choice ng-repeat="d in fruit11.data" ng-data="d"> {{d.name}} </choice>
+</choices></pre>
+        <h5>Content of fruit11.data</h5>
+        <pre>... (ignored)
 $scope.fruit11 = {
   multi: true,
   value: {},
   data: [
-    { name: &quot;Banana&quot;, value: 1, btntype: 'btn-primary' },
-    { name: &quot;Graphfruit&quot;, value: 2 },
-    { name: &quot;Pitaya&quot;, value: 3, active: true }
-]}</pre></div></div><br><hr><div class="row"><div class="col-sm-4"><h4>12. With 'ng-repeat', both choices and choice</h4><choices ng-repeat="c in fruit12" ng-model="c.value" btn-type="btn-list" multi="c.multi" class="group"><div style="clear:both">{{ c.name }}</div><choice ng-repeat="d in c.data" ng-data="d">{{d.name}}</choice></choices><br style="clear:both"><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit12[0].value}}<br>{{fruit12[1].value}}<br>{{fruit12[2].value}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices ng-repeat=&quot;c in fruit12&quot;, ng-model=&quot;c.value&quot; btn-type=&quot;btn-list&quot; multi=&quot;c.multi&quot;&gt;
-  &lt;div style=&quot;clear: both&quot;&gt; {{ c.name }}
-  &lt;choice ng-repeat=&quot;d in c.data&quot; ng-data=&quot;d&quot;&gt; {{d.name}} &lt;/choice&gt;
-&lt;/choices&gt;</pre><h5>Content of fruit12</h5><pre>$scope.fruit12 = [
-  { name: &quot;breakfast?&quot;, multi: true, value: {}, data: [
-    { name: &quot;Banana&quot;, value: 1, fallback: true },
-    { name: &quot;Graphfruit&quot;, value: 2 },
-    { name: &quot;Pitaya&quot;, value: 3, active: true }
+    { name: "Banana", value: 1, btntype: 'btn-primary' },
+    { name: "Graphfruit", value: 2 },
+    { name: "Pitaya", value: 3, active: true }
+]}</pre>
+      </div>
+    </div><br>
+    <hr>
+    <div class="row">
+      <div class="col-sm-4">
+        <h4>12. With 'ng-repeat', both choices and choice</h4>
+        <choices ng-repeat="c in fruit12" ng-model="c.value" btn-type="btn-list" multi="c.multi" class="group">
+          <div style="clear:both">{{ c.name }}</div>
+          <choice ng-repeat="d in c.data" ng-data="d">{{d.name}}</choice>
+        </choices><br style="clear:both">
+        <div class="sep"></div>
+        <h5>Your Choices:</h5>
+        <blockquote>{{fruit12[0].value}}<br>{{fruit12[1].value}}<br>{{fruit12[2].value}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices ng-repeat="c in fruit12", ng-model="c.value" btn-type="btn-list" multi="c.multi">
+  <div style="clear: both"> {{ c.name }}
+  <choice ng-repeat="d in c.data" ng-data="d"> {{d.name}} </choice>
+</choices></pre>
+        <h5>Content of fruit12</h5>
+        <pre>$scope.fruit12 = [
+  { name: "breakfast?", multi: true, value: {}, data: [
+    { name: "Banana", value: 1, fallback: true },
+    { name: "Graphfruit", value: 2 },
+    { name: "Pitaya", value: 3, active: true }
   ]},
   ... (ignored)
-]</pre></div></div><br><hr><h4>13. Single Toggle Button ( with Semantic-ui )</h4><div class="row"><div class="col-sm-4"><toggle ng-model="fruit13" active class="ui button">I love Fruit</toggle><div class="sep"></div><h5>Button Toggled?:</h5><blockquote>{{fruit13}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;toggle class=&quot;ui button&quot; ng-model=&quot;fruit13&quot;/&gt;</pre></div></div><br><hr><h4>14. Basic Button Group - Single Choice with Default Value ( with Semantic-ui )</h4><div class="row"><div class="col-sm-4"><choices ng-model="fruit14" btn-type="ui button" class="ui buttons"><choice value="banana" active>Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choices:</h5><blockquote>{{fruit14}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices class=&quot;ui buttons&quot; ng-model=&quot;fruit14&quot; btn-type=&quot;ui button&quot;&gt;
-    &lt;choice value=&quot;banana&quot; active&gt; Banana &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><h4>15. Multiple Choice with Fallback Value and Styling ( with Semantic-ui )</h4><div class="row"><div class="col-sm-4"><choices multi ng-model="fruit15" btn-type="ui button" class="ui buttons"><choice value="banana" fallback active class="green">Banana</choice><choice value="graphfruit">Graphfruit</choice><choice value="Pitaya">Pitaya</choice></choices><div class="sep"></div><h5>Your Choice:</h5><blockquote>{{fruit15}}</blockquote></div><div class="col-sm-8"><h5>Source Code</h5><pre>&lt;choices class=&quot;ui buttons&quot; multi ng-model=&quot;fruit15&quot; btn-type=&quot;ui button&quot;&gt;
-    &lt;choice class=&quot;green&quot; value=&quot;banana&quot; fallback active&gt; Banana &lt;/choice&gt;
-    &lt;choice value=&quot;graphfruit&quot;&gt; Graphfruit &lt;/choice&gt;
-    &lt;choice value=&quot;pitaya&quot;&gt; Pitaya &lt;/choice&gt;
-&lt;/choices&gt;</pre></div></div><br><hr><div class="footer">'ui-choices' by <a href="http://tkirby.org">zbryikt</a> @ 2013</div></body></html>
+]</pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>13. Single Toggle Button ( with Semantic-ui )</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <toggle ng-model="fruit13" active class="ui button">I love Fruit</toggle>
+        <div class="sep"></div>
+        <h5>Button Toggled?:</h5>
+        <blockquote>{{fruit13}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><toggle class="ui button" ng-model="fruit13"/></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>14. Basic Button Group - Single Choice with Default Value ( with Semantic-ui )</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices ng-model="fruit14" btn-type="ui button" class="ui buttons">
+          <choice value="banana" active>Banana</choice>
+          <choice value="graphfruit">Graphfruit</choice>
+          <choice value="pitaya">Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choices:</h5>
+        <blockquote>{{fruit14}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices class="ui buttons" ng-model="fruit14" btn-type="ui button">
+    <choice value="banana" active> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <h4>15. Multiple Choice with Fallback Value and Styling ( with Semantic-ui )</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <choices multi ng-model="fruit15" btn-type="ui button" class="ui buttons">
+          <choice value="banana" fallback active class="green">Banana</choice>
+          <choice value="graphfruit">Graphfruit</choice>
+          <choice value="Pitaya">Pitaya</choice>
+        </choices>
+        <div class="sep"></div>
+        <h5>Your Choice:</h5>
+        <blockquote>{{fruit15}}</blockquote>
+      </div>
+      <div class="col-sm-8">
+        <h5>Source Code</h5>
+        <pre><choices class="ui buttons" multi ng-model="fruit15" btn-type="ui button">
+    <choice class="green" value="banana" fallback active> Banana </choice>
+    <choice value="graphfruit"> Graphfruit </choice>
+    <choice value="pitaya"> Pitaya </choice>
+</choices></pre>
+      </div>
+    </div><br>
+    <hr>
+    <div class="footer">'ui-choices' by <a href="http://tkirby.org">zbryikt</a> @ 2013</div>
+  </body>
+</html>

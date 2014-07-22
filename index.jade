@@ -1,4 +1,4 @@
-!!!5
+doctype html
 html
   head
     link(rel="stylesheet",type="text/css",href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css")
@@ -228,6 +228,28 @@ html
         h5 Source Code
         pre.
           <choices multi data-type="array" btn-type="btn-danger" ng-model="fruit7">
+              <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
+              <choice value="graphfruit"> Graphfruit </choice>
+              <choice value="pitaya"> Pitaya </choice>
+          </choices>
+    br
+    hr
+
+    h4 7.1 Use Single Value in Single Choice
+    .row
+      .col-sm-4
+        choices(data-type="single", btn-type="btn-danger", ng-model="fruit7_1")
+          choice(value="banana",fallback, active, btn-type="btn-success") Banana
+          choice(value="graphfruit") Graphfruit
+          choice(value="Pitaya") Pitaya
+        .sep
+        h5 Your Choice:
+        blockquote
+          | {{fruit7_1}}
+      .col-sm-8
+        h5 Source Code
+        pre.
+          <choices data-type="single" btn-type="btn-danger" ng-model="fruit7_1">
               <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
               <choice value="graphfruit"> Graphfruit </choice>
               <choice value="pitaya"> Pitaya </choice>
