@@ -201,7 +201,9 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
           a.btnType = ref$;
         }
       }
-      c = c();
+      if (typeof c === "function") {
+        c = c();
+      }
       e.addClass((that = a['btnType'])
         ? that
         : (that = c.btntype) ? that : 'btn-primary');
