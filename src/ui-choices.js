@@ -13,7 +13,6 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
       if (!e.hasClass('ui')) {
         e.addClass('btn');
       }
-      console.log(e.attr('class'));
       if (a['ngModel']) {
         s.model = a['active'] !== undefined || !!s.model;
         e.on('click', function(){
@@ -80,7 +79,6 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
           }
           return d[i].e[(d[i].on ? 'add' : 'remove') + "Class"]('active');
         });
-        console.log("set / ", s.type);
         if (s.type === "array") {
           return s.model = k.filter(function(it){
             return d[it].on;
@@ -108,7 +106,6 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
         if (!d || (!d.length && s.type === "array")) {
           return;
         }
-        console.log("get / ", s.type);
         if (s.type === "array") {
           res$ = [];
           for (i$ = 0, len$ = d.length; i$ < len$; ++i$) {

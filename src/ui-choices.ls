@@ -8,7 +8,6 @@ angular.module \ui.choices, <[]>
     scope: {model: '=ngModel', id: '='}
     link: (s,e,a) ->
       if !e.hasClass \ui => e.addClass \btn
-      console.log e.attr \class
       if a[\ngModel] =>
         s.model = a[\active]!=undefined or !!s.model
         e.on \click ->
