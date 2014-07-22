@@ -80,12 +80,17 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
           }
           return d[i].e[(d[i].on ? 'add' : 'remove') + "Class"]('active');
         });
+        console.log("set / ", s.type);
         if (s.type === "array") {
           return s.model = k.filter(function(it){
             return d[it].on;
           }).map(function(it){
             return d[it].v;
           });
+        } else if (s.type === "single") {
+          return s.model = k.filter(function(it){
+            return d[it].on;
+          })[0] || undefined;
         } else {
           s.model = {};
           return k.map(function(it){
@@ -103,6 +108,7 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
         if (!d || (!d.length && s.type === "array")) {
           return;
         }
+        console.log("get / ", s.type);
         if (s.type === "array") {
           res$ = [];
           for (i$ = 0, len$ = d.length; i$ < len$; ++i$) {
@@ -110,6 +116,8 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
             res$.push(x + "");
           }
           d = res$;
+        } else if (s.type === "single") {
+          d = [d + ""];
         } else {
           d = (function(){
             var results$ = [];

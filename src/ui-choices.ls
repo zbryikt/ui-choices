@@ -42,6 +42,7 @@ angular.module \ui.choices, <[]>
           if d[i]m => s.$parent.$eval "#{d[i]m}=#{d[i]on}"
           d[i]e["#{if d[i]on => \add else \remove}Class"] \active
         if s.type == "array" => s.model = k.filter(->d[it]on)map -> d[it]v
+        else if s.type =="single" => s.model = k.filter(->d[it]on)[0] or undefined
         else
           s.model = {}
           k.map -> s.model[it] = !!d[it]on
@@ -53,6 +54,7 @@ angular.module \ui.choices, <[]>
       s.$watch \model, (d) ->
         if !d or (!d.length and s.type=="array") => return
         if s.type=="array" => d = ["#{x}" for x in d]
+        else if s.type=="single" => d = ["#d"]
         else d = [k for k of d]filter(-> d[it])
         for k,v of s.data
           v.e["#{if v.on = (k in d) => \add else \remove}Class"] \active
