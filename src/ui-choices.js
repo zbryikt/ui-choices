@@ -190,7 +190,7 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
     },
     template: "<label><span ng-transclude></span></label>",
     link: function(s, e, a, c){
-      var ref$, that;
+      var ref$, btntype, that;
       if (!e.hasClass('ui')) {
         e.addClass('btn');
       }
@@ -203,9 +203,12 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
       if (typeof c === "function") {
         c = c();
       }
+      btntype = typeof c.btntype === 'function'
+        ? c.btntype()
+        : c.btntype;
       e.addClass((that = a['btnType'])
         ? that
-        : (that = c.btntype) ? that : 'btn-primary');
+        : (that = btntype) ? that : 'btn-primary');
       c.node.add(e, a);
       return e.on('click', function(){
         var r, v;
