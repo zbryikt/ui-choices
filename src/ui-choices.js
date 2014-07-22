@@ -138,7 +138,7 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
     },
     controller: function($scope, $element){
       $scope.btntype = $element.attr('btn-type');
-      this.node = {
+      $scope.node = this.node = {
         d: {},
         add: function(e, a){
           var v, that, this$ = this;
@@ -201,9 +201,10 @@ angular.module('ui.choices', []).directive('toggle', function($compile){
           a.btnType = ref$;
         }
       }
+      c = c();
       e.addClass((that = a['btnType'])
         ? that
-        : (that = c.btntype()) ? that : 'btn-primary');
+        : (that = c.btntype) ? that : 'btn-primary');
       c.node.add(e, a);
       return e.on('click', function(){
         var r, v;

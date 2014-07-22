@@ -62,7 +62,7 @@ angular.module \ui.choices, <[]>
 
     controller: ($scope, $element) ->
       $scope.btntype = $element.attr \btn-type
-      @node =
+      $scope.node = @node =
         d: {}
         add: (e,a) ->
           v = a[\value]
@@ -92,7 +92,8 @@ angular.module \ui.choices, <[]>
       if s.d =>
         a{value,fallback,active,ngModel} = s.d
         a.btnType? =s.d.btntype
-      e.addClass if a[\btnType] => that else if c.btntype! => that else \btn-primary
+      c = c!
+      e.addClass if a[\btnType] => that else if c.btntype => that else \btn-primary
       c.node.add e, a
       e.on \click ->
         r = c.node.tgl v = a[\value]
