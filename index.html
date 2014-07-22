@@ -59,13 +59,13 @@
     <h4>Abstract</h4>This angular module 'ui-choices' helps you build up button groups in simple direcitves. It follows bootstrap 3.0 button css class naming, so you can directly use bootstrap.css to style your buttons. It is semantic-ui-friendly, too. ui-choices also provides <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">a css file</a> ( compiled from <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.sass">a sass file</a> ) that can be used independently to any other frameworks. Source code can be found at <a href="http://github.com/zbryikt/ui-choices/">http://github.com/zbryikt/ui-choices/</a>. Here shows some examples about how to use ui-choices in various ways.<br><br>
     <hr>
     <h4>0. Preparation</h4>Include angular.js, <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.js">ui-choices.js</a> and bootstrap.css ( or <a href="https://raw.github.com/zbryikt/ui-choices/master/src/ui-choices.css">ui-choices.css</a> as an alternative ):<br><br>
-    <pre><head>
+    <pre>&#60;head&#62;
   ...
-  <link rel="stylesheet" type="text/css" href="your-path-to/ui-choices.css"/>
-  <script type="text/javascript" src="your-path-to/angular.js"></script>
-  <script type="text/javascript" src="your-path-to/ui-choices.js"></script>
+  &#60;link rel="stylesheet" type="text/css" href="your-path-to/ui-choices.css"/&#62;
+  &#60;script type="text/javascript" src="your-path-to/angular.js"&#62;60;script&#62;
+  &#60;script type="text/javascript" src="your-path-to/ui-choices.js"&#62;60;script&#62;
   ...
-</head></pre><br>
+&#60;head&#62;</pre><br>
     <hr>
     <h4>1. Single Toggle Button</h4>
     <div class="row">
@@ -77,7 +77,7 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><toggle class="btn-success" ng-model="fruit1"/></pre>
+        <pre>&#60;toggle class="btn-success" ng-model="fruit1"/&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -95,11 +95,11 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices ng-model="fruit2">
-    <choice value="banana"> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices></pre>
+        <pre>&#60;choices ng-model="fruit2"&#62;
+    &#60;choice value="banana"&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -117,11 +117,11 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices multi ng-model="fruit3">
-    <choice value="banana"> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices></pre>
+        <pre>&#60;choices multi ng-model="fruit3"&#62;
+    &#60;choice value="banana"&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -139,11 +139,11 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices multi ng-model="fruit4">
-    <choice value="banana" active> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices></pre>
+        <pre>&#60;choices multi ng-model="fruit4"&#62;
+    &#60;choice value="banana" active&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -161,11 +161,11 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices multi ng-model="fruit5">
-    <choice value="banana" fallback active> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices></pre>
+        <pre>&#60;choices multi ng-model="fruit5"&#62;
+    &#60;choice value="banana" fallback active&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -183,11 +183,11 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices multi btn-type="btn-danger" ng-model="fruit6">
-    <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices></pre>
+        <pre>&#60;choices multi btn-type="btn-danger" ng-model="fruit6"&#62;
+    &#60;choice value="banana" fallback active btn-type="btn-success"&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -205,33 +205,33 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices multi data-type="array" btn-type="btn-danger" ng-model="fruit7">
-    <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices></pre>
+        <pre>&#60;choices multi data-type="array" btn-type="btn-danger" ng-model="fruit7"&#62;
+    &#60;choice value="banana" fallback active btn-type="btn-success"&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
     <h4>7.1 Use Single Value in Single Choice</h4>
     <div class="row">
       <div class="col-sm-4">
-        <choices data-type="single" btn-type="btn-danger" ng-model="fruit7_1">
+        <choices data-type="single" btn-type="btn-danger" ng-model="fruit71">
           <choice value="banana" fallback active btn-type="btn-success">Banana</choice>
           <choice value="graphfruit">Graphfruit</choice>
           <choice value="Pitaya">Pitaya</choice>
         </choices>
         <div class="sep"></div>
         <h5>Your Choice:</h5>
-        <blockquote>{{fruit7_1}}</blockquote>
+        <blockquote>{{fruit71}}</blockquote>
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices data-type="single" btn-type="btn-danger" ng-model="fruit7_1">
-    <choice value="banana" fallback active btn-type="btn-success"> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices></pre>
+        <pre>&#60;choices data-type="single" btn-type="btn-danger" ng-model="fruit71"&#62;
+    &#60;choice value="banana" fallback active btn-type="btn-success"&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -249,17 +249,17 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices ng-model="fruit8">
-    <choice value="banana" btn-type="btn-success">
-      <i class="glyphicon glyphicon-ok"></i> Banana
-    </choice>
-    <choice value="graphfruit" btn-type="btn-warning">
-      <i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit
-    </choice>
-    <choice value="pitaya" btn-type="btn-danger">
-      <i class="glyphicon glyphicon-remove"></i> Pitaya
-    </choice>
-</choices></pre>
+        <pre>&#60;choices ng-model="fruit8"&#62;
+    &#60;choice value="banana" btn-type="btn-success"&#62;
+      &#60;i class="glyphicon glyphicon-ok"&#62;60;i&#62; Banana
+    &#60;choice&#62;
+    &#60;choice value="graphfruit" btn-type="btn-warning"&#62;
+      &#60;i class="glyphicon glyphicon-exclamation-sign"&#62;60;i&#62; Graphfruit
+    &#60;choice&#62;
+    &#60;choice value="pitaya" btn-type="btn-danger"&#62;
+      &#60;i class="glyphicon glyphicon-remove"&#62;60;i&#62; Pitaya
+    &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -279,17 +279,17 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices ng-model="fruit9">
-    <choice value="banana" btn-type="btn-success" ng-model="isBananaChosen">
-      <i class="glyphicon glyphicon-ok"></i> Banana
-    </choice>
-    <choice value="graphfruit" btn-type="btn-warning">
-      <i class="glyphicon glyphicon-exclamation-sign"></i> Graphfruit
-    </choice>
-    <choice value="pitaya" btn-type="btn-danger">
-      <i class="glyphicon glyphicon-remove"></i> Pitaya
-    </choice>
-</choices></pre>
+        <pre>&#60;choices ng-model="fruit9"&#62;
+    &#60;choice value="banana" btn-type="btn-success" ng-model="isBananaChosen"&#62;
+      &#60;i class="glyphicon glyphicon-ok"&#62;60;i&#62; Banana
+    &#60;choice&#62;
+    &#60;choice value="graphfruit" btn-type="btn-warning"&#62;
+      &#60;i class="glyphicon glyphicon-exclamation-sign"&#62;60;i&#62; Graphfruit
+    &#60;choice&#62;
+    &#60;choice value="pitaya" btn-type="btn-danger"&#62;
+      &#60;i class="glyphicon glyphicon-remove"&#62;60;i&#62; Pitaya
+    &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -321,11 +321,11 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices ng-model="fruit10.q1" btn-type="btn-list">
-    <choice value="banana" fallback> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices>
+        <pre>&#60;choices ng-model="fruit10.q1" btn-type="btn-list"&#62;
+    &#60;choice value="banana" fallback&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;
 ... (ignored)</pre>
         <h5>Stylesheet</h5>
         <pre>.btn-list {
@@ -361,9 +361,9 @@
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices ng-model="fruit11.value" btn-type="btn-default" multi="fruit11.multi">
-  <choice ng-repeat="d in fruit11.data" ng-data="d"> {{d.name}} </choice>
-</choices></pre>
+        <pre>&#60;choices ng-model="fruit11.value" btn-type="btn-default" multi="fruit11.multi"&#62;
+  &#60;choice ng-repeat="d in fruit11.data" ng-data="d"&#62; {{d.name}} &#60;choice&#62;
+&#60;choices&#62;</pre>
         <h5>Content of fruit11.data</h5>
         <pre>... (ignored)
 $scope.fruit11 = {
@@ -390,10 +390,10 @@ $scope.fruit11 = {
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices ng-repeat="c in fruit12", ng-model="c.value" btn-type="btn-list" multi="c.multi">
-  <div style="clear: both"> {{ c.name }}
-  <choice ng-repeat="d in c.data" ng-data="d"> {{d.name}} </choice>
-</choices></pre>
+        <pre>&#60;choices ng-repeat="c in fruit12" ng-model="c.value" btn-type="btn-list" multi="c.multi"&#62;
+  &#60;div style="clear: both"&#62; {{ c.name }}
+  &#60;choice ng-repeat="d in c.data" ng-data="d"&#62; {{d.name}} &#60;choice&#62;
+&#60;choices&#62;</pre>
         <h5>Content of fruit12</h5>
         <pre>$scope.fruit12 = [
   { name: "breakfast?", multi: true, value: {}, data: [
@@ -416,7 +416,7 @@ $scope.fruit11 = {
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><toggle class="ui button" ng-model="fruit13"/></pre>
+        <pre>&#60;toggle class="ui button" ng-model="fruit13"/&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -434,11 +434,11 @@ $scope.fruit11 = {
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices class="ui buttons" ng-model="fruit14" btn-type="ui button">
-    <choice value="banana" active> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices></pre>
+        <pre>&#60;choices class="ui buttons" ng-model="fruit14" btn-type="ui button"&#62;
+    &#60;choice value="banana" active&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
@@ -456,11 +456,11 @@ $scope.fruit11 = {
       </div>
       <div class="col-sm-8">
         <h5>Source Code</h5>
-        <pre><choices class="ui buttons" multi ng-model="fruit15" btn-type="ui button">
-    <choice class="green" value="banana" fallback active> Banana </choice>
-    <choice value="graphfruit"> Graphfruit </choice>
-    <choice value="pitaya"> Pitaya </choice>
-</choices></pre>
+        <pre>&#60;choices class="ui buttons" multi ng-model="fruit15" btn-type="ui button"&#62;
+    &#60;choice class="green" value="banana" fallback active&#62; Banana &#60;choice&#62;
+    &#60;choice value="graphfruit"&#62; Graphfruit &#60;choice&#62;
+    &#60;choice value="pitaya"&#62; Pitaya &#60;choice&#62;
+&#60;choices&#62;</pre>
       </div>
     </div><br>
     <hr>
