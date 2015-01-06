@@ -60,7 +60,7 @@ angular.module \ui.choices, <[]>
           if v.m => s.$parent.$eval "#{v.m}=#{v.on}"
       ,true
 
-    controller: ($scope, $element) ->
+    controller: <[$scope $element]> ++ ($scope, $element) ->
       $scope.btntype = $element.attr \btn-type
       $scope.node = @node =
         d: {}
